@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6601802176F3E7D0F88AA6FD6C579DFCC7B4EB0C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6601802176F3E7D0F88AA6FD6C579DFCC7B4EB0C" : 9223372036854775807,
+    "180B7C2FA5FCF0154D9EDE1262E510428BFDE810" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "56D91E9C-F367-410D-A28E-50D4DBB559FF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6601802176F3E7D0F88AA6FD6C579DFCC7B4EB0C" : "GetSneaks\/",
+    "180B7C2FA5FCF0154D9EDE1262E510428BFDE810" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "GetSneaks",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "GetSneaks\/GetSneaks.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:fjohnson1991\/GetSneaks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "180B7C2FA5FCF0154D9EDE1262E510428BFDE810"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:fjohnson1991\/GetSneaks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6601802176F3E7D0F88AA6FD6C579DFCC7B4EB0C"
+    }
+  ]
+}
