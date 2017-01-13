@@ -21,6 +21,7 @@ class CubicChart: UIView {
     
     var delegate: GetChartData! {
         didSet {
+            print("CUBIC CHART CONFIG")
             populateData()
             cublicLineChartSetup()
         }
