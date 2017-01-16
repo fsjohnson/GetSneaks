@@ -12,11 +12,12 @@ import Foundation
 import CoreData
 
 protocol GetChartData {
-    func getChartData(with dataPoints: [String], values: [String])
+    func getChartData(with dataPoints: [String], values: [String], legend: String)
     var workoutDuration: [String] {get set}
     var beatsPerMinute: [String] {get set}
     var milesWorkoutDuration: [String] {get set}
     var milesBeatsPerMinute: [String] {get set}
+    var legend: String {get set}
 }
 
 class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate {
@@ -30,6 +31,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     var beatsPerMinute = [String]()
     var milesWorkoutDuration = [String]()
     var milesBeatsPerMinute = [String]()
+    var legend = String()
     var miles = [String]()
     var workouts = [Workout]()
     var chartContainerView = UIView()
@@ -70,7 +72,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         
         // initial chart layout
         populateChartData()
-        self.getChartData(with: milesWorkoutDuration, values: milesBeatsPerMinute)
+        self.getChartData(with: milesWorkoutDuration, values: milesBeatsPerMinute, legend: "Miles")
         barChartConfig()
         
         // background color
@@ -105,11 +107,11 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func segmentedControlSegues(sender: UISegmentedControl!) {
         if sender.selectedSegmentIndex == 0 {
             populateChartData()
-            self.getChartData(with: milesWorkoutDuration, values: milesBeatsPerMinute)
+            self.getChartData(with: milesWorkoutDuration, values: milesBeatsPerMinute, legend: "Miles")
             barChartConfig()
         } else if sender.selectedSegmentIndex == 1 {
             populateChartData()
-            self.getChartData(with: workoutDuration, values: beatsPerMinute)
+            self.getChartData(with: workoutDuration, values: beatsPerMinute, legend: "Calories")
             barChartConfig()
         }
     }
@@ -160,11 +162,12 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     }
     
     // Conform to protocol
-    func getChartData(with dataPoints: [String], values: [String]) {
+    func getChartData(with dataPoints: [String], values: [String], legend: String) {
         self.workoutDuration = dataPoints
         self.beatsPerMinute = values
         self.milesWorkoutDuration = dataPoints
         self.milesBeatsPerMinute = values
+        self.legend = legend
     }
     
     // Navigation

@@ -18,6 +18,7 @@ class BarChart: UIView {
     // Chart data
     var workoutDuration = [String]()
     var beatsPerMinute = [String]()
+    var legend = String()
     
     var delegate: GetChartData! {
         didSet {
@@ -29,6 +30,7 @@ class BarChart: UIView {
     func populateData() {
         workoutDuration = delegate.workoutDuration
         beatsPerMinute = delegate.beatsPerMinute
+        legend = delegate.legend
     }
     
     func barChartSetup() {
@@ -46,10 +48,10 @@ class BarChart: UIView {
         barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
         
         // Bar chart population
-        setBarChart(dataPoints: workoutDuration, values: beatsPerMinute)
+        setBarChart(dataPoints: workoutDuration, values: beatsPerMinute, legend: legend)
     }
     
-    func setBarChart(dataPoints: [String], values: [String]) {
+    func setBarChart(dataPoints: [String], values: [String], legend: String) {
         
         // No data setup
         barChartView.noDataTextColor = UIColor.white
@@ -62,7 +64,7 @@ class BarChart: UIView {
             dataEntry.append(dataPoint)
         }
         
-        let chartDataSet = BarChartDataSet(values: dataEntry, label: "BPM")
+        let chartDataSet = BarChartDataSet(values: dataEntry, label: legend)
         let chartData = BarChartData()
         chartData.addDataSet(chartDataSet)
         chartData.setDrawValues(false) // true if want values above bar
@@ -87,6 +89,5 @@ class BarChart: UIView {
         barChartView.legend.textColor = UIColor.white
         barChartView.barData?.setValueTextColor(UIColor.white)
         barChartView.leftAxis.labelTextColor = UIColor.white
-        
     }
 }
