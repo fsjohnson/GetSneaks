@@ -33,9 +33,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     var miles = [String]()
     var workouts = [Workout]()
     var chartContainerView = UIView()
-    let cubicChart = CubicChart()
     let barChart = BarChart()
-    let lineChart = LineChart()
     
     // Segmented controller
     var segmentedControl = UISegmentedControl(items: ["Miles", "Calories", "Old Sneaks"])
@@ -48,14 +46,9 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         
         // Config view
         configLayout()
-        populateChartData()
-        self.getChartData(with: milesWorkoutDuration, values: milesBeatsPerMinute)
-        barChartConfig()
-        self.view.backgroundColor = UIColor.themeMediumBlue
-        
+
         // Config container view
         configChartContainerView()
-        
         
         // Config segmented control
         configSegmentedControl()
@@ -74,6 +67,14 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         getSneaksTop.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         getSneaksTop.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
         getSneaksTop.heightAnchor.constraint(equalToConstant: 162).isActive = true
+        
+        // initial chart layout
+        populateChartData()
+        self.getChartData(with: milesWorkoutDuration, values: milesBeatsPerMinute)
+        barChartConfig()
+        
+        // background color
+        self.view.backgroundColor = UIColor.themeMediumBlue
     }
     
     // Container view for charts
@@ -147,17 +148,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         print("MILES: \(miles)")
     }
     
-    // Chart options
-    func cubicChartConfig() {
-        chartContainerView.addSubview(cubicChart)
-        cubicChart.translatesAutoresizingMaskIntoConstraints = false
-        cubicChart.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        cubicChart.widthAnchor.constraint(equalTo: chartContainerView.widthAnchor, constant: -20).isActive = true
-        cubicChart.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 0).isActive = true
-        cubicChart.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor).isActive = true
-        cubicChart.delegate = self
-    }
-    
+    // Bar chart config
     func barChartConfig() {
         self.chartContainerView.addSubview(barChart)
         barChart.translatesAutoresizingMaskIntoConstraints = false
@@ -166,16 +157,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         barChart.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 0).isActive = true
         barChart.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor).isActive = true
         barChart.delegate = self
-    }
-    
-    func lineChartConfig() {
-        self.chartContainerView.addSubview(lineChart)
-        lineChart.translatesAutoresizingMaskIntoConstraints = false
-        lineChart.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        lineChart.widthAnchor.constraint(equalTo: chartContainerView.widthAnchor, constant: -20).isActive = true
-        lineChart.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 0).isActive = true
-        lineChart.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor).isActive = true
-        lineChart.delegate = self
     }
     
     // Conform to protocol
@@ -187,7 +168,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     }
     
     // Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "postWorkout" {
             let dest = segue.destination as! AddDataViewController

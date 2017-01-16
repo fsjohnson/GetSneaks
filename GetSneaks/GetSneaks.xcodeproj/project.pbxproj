@@ -17,9 +17,7 @@
 		B51EC0F91E27FAF7004B0FBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51EC0F71E27FAF7004B0FBA /* LaunchScreen.storyboard */; };
 		B51EC1011E27FBD7004B0FBA /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1001E27FBD7004B0FBA /* BarChart.swift */; };
 		B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */; };
-		B51EC1061E27FBDF004B0FBA /* CubicChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1031E27FBDF004B0FBA /* CubicChart.swift */; };
 		B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1041E27FBDF004B0FBA /* CustomColor.swift */; };
-		B51EC1091E27FBFA004B0FBA /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1081E27FBFA004B0FBA /* LineChart.swift */; };
 		B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B51EC10D1E283D0B004B0FBA /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -38,9 +36,7 @@
 		B51EC0FA1E27FAF7004B0FBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B51EC1001E27FBD7004B0FBA /* BarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		B51EC1031E27FBDF004B0FBA /* CubicChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicChart.swift; sourceTree = "<group>"; };
 		B51EC1041E27FBDF004B0FBA /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
-		B51EC1081E27FBFA004B0FBA /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		B51EC10E1E283D0B004B0FBA /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,9 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				B51EC1001E27FBD7004B0FBA /* BarChart.swift */,
-				B51EC1031E27FBDF004B0FBA /* CubicChart.swift */,
 				B50FA69F1E295662006D713A /* GetSneaksTop.swift */,
-				B51EC1081E27FBFA004B0FBA /* LineChart.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -270,10 +264,8 @@
 				B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */,
 				B50FA69E1E295566006D713A /* AddDataViewController.swift in Sources */,
 				B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */,
-				B51EC1061E27FBDF004B0FBA /* CubicChart.swift in Sources */,
 				B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */,
 				B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */,
-				B51EC1091E27FBFA004B0FBA /* LineChart.swift in Sources */,
 				B51EC1011E27FBD7004B0FBA /* BarChart.swift in Sources */,
 				B51EC0EF1E27FAF7004B0FBA /* AppDelegate.swift in Sources */,
 				B50FA6A01E295662006D713A /* GetSneaksTop.swift in Sources */,
