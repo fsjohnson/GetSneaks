@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		25FD7E3854CBFAD570A4BDD3 /* Pods_GetSneaks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93807EFFDE2A6C615273CC6 /* Pods_GetSneaks.framework */; };
-		B50FA69E1E295566006D713A /* AddDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50FA69D1E295566006D713A /* AddDataViewController.swift */; };
 		B50FA6A01E295662006D713A /* GetSneaksTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50FA69F1E295662006D713A /* GetSneaksTop.swift */; };
 		B51EC0EF1E27FAF7004B0FBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC0EE1E27FAF7004B0FBA /* AppDelegate.swift */; };
 		B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC0F01E27FAF7004B0FBA /* DataModel.swift */; };
@@ -19,13 +18,13 @@
 		B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */; };
 		B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1041E27FBDF004B0FBA /* CustomColor.swift */; };
 		B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B51EC10D1E283D0B004B0FBA /* DataModel.xcdatamodeld */; };
+		B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		10476F8867EA4278E10C5AC5 /* Pods-GetSneaks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetSneaks.release.xcconfig"; path = "Pods/Target Support Files/Pods-GetSneaks/Pods-GetSneaks.release.xcconfig"; sourceTree = "<group>"; };
 		776F9B141B3B19FE158E87A5 /* Pods-GetSneaks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetSneaks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GetSneaks/Pods-GetSneaks.debug.xcconfig"; sourceTree = "<group>"; };
 		A93807EFFDE2A6C615273CC6 /* Pods_GetSneaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetSneaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B50FA69D1E295566006D713A /* AddDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDataViewController.swift; sourceTree = "<group>"; };
 		B50FA69F1E295662006D713A /* GetSneaksTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSneaksTop.swift; sourceTree = "<group>"; };
 		B51EC0EB1E27FAF7004B0FBA /* GetSneaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSneaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51EC0EE1E27FAF7004B0FBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B51EC1041E27FBDF004B0FBA /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		B51EC10E1E283D0B004B0FBA /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWorkoutData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +97,9 @@
 		B51EC10A1E27FC00004B0FBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B51EC1001E27FBD7004B0FBA /* BarChart.swift */,
 				B50FA69F1E295662006D713A /* GetSneaksTop.swift */,
+				B51EC1001E27FBD7004B0FBA /* BarChart.swift */,
+				B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -107,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */,
-				B50FA69D1E295566006D713A /* AddDataViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -262,8 +262,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */,
-				B50FA69E1E295566006D713A /* AddDataViewController.swift in Sources */,
 				B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */,
+				B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */,
 				B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */,
 				B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */,
 				B51EC1011E27FBD7004B0FBA /* BarChart.swift in Sources */,

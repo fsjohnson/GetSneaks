@@ -1,57 +1,67 @@
 //
-//  AddDataViewController.swift
+//  NewWorkoutData.swift
 //  GetSneaks
 //
-//  Created by Felicity Johnson on 1/13/17.
+//  Created by Felicity Johnson on 1/16/17.
 //  Copyright © 2017 FJ. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class AddDataViewController: UIViewController {
+class NewWorkoutData: UIView {
     
     // User input data
     var mileageLabel = UILabel()
     var mileageTextField = UITextField()
+    var caloriesLabel = UILabel()
+    var caloriesTextField = UITextField()
+    var minutesLabel = UILabel()
+    var minutesTextField = UITextField()
     var submitButton = UIButton()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configLayout()
     }
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // Config view
     func configLayout() {
         mileageLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(mileageLabel)
-        mileageLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50).isActive = true
-        mileageLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        self.addSubview(mileageLabel)
+        mileageLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
+        mileageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         mileageLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         mileageLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        mileageLabel.font = UIFont(name: "Helvetica", size: 20.0)
+        mileageLabel.font = UIFont(name: "Optima-Bold", size: 15.0)
         mileageLabel.text = "Miles"
-        mileageLabel.backgroundColor = UIColor.blue
+        mileageLabel.textColor = UIColor.white
         
         mileageTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(mileageTextField)
-        mileageTextField.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50).isActive = true
+        self.addSubview(mileageTextField)
+        mileageTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         mileageTextField.leadingAnchor.constraint(equalTo: mileageLabel.trailingAnchor, constant: 8).isActive = true
         mileageTextField.heightAnchor.constraint(equalToConstant: 25).isActive = true
         mileageTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        mileageTextField.font = UIFont(name: "Helvetica", size: 12.0)
-        mileageTextField.placeholder = "Enter here"
-        mileageTextField.backgroundColor = UIColor.orange
+        mileageTextField.font = UIFont(name: "Optima-Bold", size: 15.0)
+        mileageTextField.attributedPlaceholder = NSAttributedString(string: "Miles", attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Optima-Italic", size: 15.0)!])
+        mileageTextField.textColor = UIColor.white
+        mileageTextField.layer.borderWidth = 1.0
+        mileageTextField.layer.borderColor = UIColor.white.cgColor
+        mileageTextField.layer.cornerRadius = 4.0
         
         submitButton.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(submitButton)
+        self.addSubview(submitButton)
         submitButton.topAnchor.constraint(equalTo: mileageTextField.bottomAnchor, constant: 20).isActive = true
-        submitButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        submitButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         submitButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         submitButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         submitButton.setTitle("Submit", for: .normal)
-        submitButton.backgroundColor = UIColor.blue
+        submitButton.setTitleColor(UIColor.white, for: .normal)
         submitButton.addTarget(self, action: #selector(saveToCoreData), for: .touchUpInside)
     }
     
@@ -66,16 +76,4 @@ class AddDataViewController: UIViewController {
             DataModel.sharedInstance.saveContext()
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

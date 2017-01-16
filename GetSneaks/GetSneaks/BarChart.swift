@@ -17,7 +17,9 @@ class BarChart: UIView {
     
     // Chart data
     var workoutDuration = [String]()
-    var beatsPerMinute = [String]()
+    var calories = [String]()
+    var dates = [String]()
+    var miles = [String]()
     var legend = String()
     
     var delegate: GetChartData! {
@@ -29,12 +31,13 @@ class BarChart: UIView {
     
     func populateData() {
         workoutDuration = delegate.workoutDuration
-        beatsPerMinute = delegate.beatsPerMinute
+        miles = delegate.miles
+        dates = delegate.dates
+        calories = delegate.calories
         legend = delegate.legend
     }
     
     func barChartSetup() {
-        
         // Bar chart config
         self.backgroundColor = UIColor.themeMediumBlue
         self.addSubview(barChartView)
@@ -47,11 +50,11 @@ class BarChart: UIView {
         // Bar chart animation
         barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
         
-        // Bar chart population
-        setBarChart(dataPoints: workoutDuration, values: beatsPerMinute, legend: legend)
+        setBarChart(dataPoints: dates, values: workoutDuration, legend: legend)
     }
     
     func setBarChart(dataPoints: [String], values: [String], legend: String) {
+        dataEntry.removeAll()
         
         // No data setup
         barChartView.noDataTextColor = UIColor.white
@@ -89,5 +92,6 @@ class BarChart: UIView {
         barChartView.legend.textColor = UIColor.white
         barChartView.barData?.setValueTextColor(UIColor.white)
         barChartView.leftAxis.labelTextColor = UIColor.white
+        barChartView.xAxis.granularity = 1
     }
 }
