@@ -21,8 +21,11 @@ class LineChart: UIView {
     
     var delegate: GetChartData! {
         didSet {
+            print("LINE")
+            print("1WORKOUT: \(workoutDuration)")
             populateData()
             lineChartSetup()
+            print("2WORKOUT: \(workoutDuration)")
         }
     }
     
@@ -70,15 +73,15 @@ class LineChart: UIView {
         chartDataSet.setCircleColor(UIColor.themePink)
         chartDataSet.circleHoleColor = UIColor.themePink
         chartDataSet.circleRadius = 4.0
-        
-        // Gradient fill
+
+         // Gradient fill
         let gradientColors = [UIColor.themePink.cgColor, UIColor.clear.cgColor] as CFArray
         let colorLocations: [CGFloat] = [1.0, 0.0] // positioning of gradient
         guard let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) else { print("gradient error"); return }
         chartDataSet.fill = Fill.fillWithLinearGradient(gradient, angle: 90.0)
         chartDataSet.drawFilledEnabled = true
         
-        // Axes setup
+         // Axes setup
         let formatter: ChartFormatter = ChartFormatter()
         formatter.setValues(values: dataPoints)
         let xaxis:XAxis = XAxis()

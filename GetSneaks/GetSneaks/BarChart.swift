@@ -34,7 +34,7 @@ class BarChart: UIView {
     func barChartSetup() {
         
         // Bar chart config
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.themeMediumBlue
         self.addSubview(barChartView)
         barChartView.translatesAutoresizingMaskIntoConstraints = false
         barChartView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
@@ -66,7 +66,7 @@ class BarChart: UIView {
         let chartData = BarChartData()
         chartData.addDataSet(chartDataSet)
         chartData.setDrawValues(false) // true if want values above bar
-        chartDataSet.colors = [UIColor.themePink]
+        chartDataSet.colors = [UIColor.themeLightGreen]
         
         // Axes setup
         let formatter: ChartFormatter = ChartFormatter()
@@ -82,5 +82,11 @@ class BarChart: UIView {
         barChartView.leftAxis.drawGridLinesEnabled = false // true if want Y-Axis grid lines
         barChartView.leftAxis.drawLabelsEnabled = true
         barChartView.data = chartData
+        barChartView.backgroundColor = UIColor.themeMediumBlue
+        barChartView.xAxis.labelTextColor = UIColor.white
+        barChartView.legend.textColor = UIColor.white
+        barChartView.barData?.setValueTextColor(UIColor.white)
+        barChartView.leftAxis.labelTextColor = UIColor.white
+        
     }
 }
