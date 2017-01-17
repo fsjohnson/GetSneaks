@@ -42,7 +42,7 @@ class BarChart: UIView {
         self.backgroundColor = UIColor.themeMediumBlue
         self.addSubview(barChartView)
         barChartView.translatesAutoresizingMaskIntoConstraints = false
-        barChartView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        barChartView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         barChartView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         barChartView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         barChartView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
@@ -90,6 +90,7 @@ class BarChart: UIView {
         barChartView.backgroundColor = UIColor.themeMediumBlue
         barChartView.xAxis.labelTextColor = UIColor.white
         barChartView.legend.textColor = UIColor.white
+        barChartView.legend.font = UIFont(name: "Optima-Bold", size: 12)!
         barChartView.barData?.setValueTextColor(UIColor.white)
         barChartView.leftAxis.labelTextColor = UIColor.white
         barChartView.xAxis.granularity = 1

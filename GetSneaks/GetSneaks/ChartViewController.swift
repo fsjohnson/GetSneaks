@@ -60,6 +60,14 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         // Config keyboard 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        hideKeyboardWhenTappedAround(isActive: true)
+        
+        print("DATES: \(dates)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        populateChartData()
+        getSneaksTop.populateMilesCompleted()
     }
     
     // Config view
@@ -71,7 +79,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         getSneaksTop.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 8).isActive = true
         getSneaksTop.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         getSneaksTop.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-        getSneaksTop.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        getSneaksTop.heightAnchor.constraint(equalToConstant: 130).isActive = true
         
         // initial chart layout
         populateChartData()
@@ -97,7 +105,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func configSegmentedControl() {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(segmentedControl)
-        segmentedControl.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 17).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         segmentedControl.topAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: 8).isActive = true
@@ -131,7 +139,50 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 8).isActive = true
         newWorkoutData.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
         newWorkoutData.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
-        newWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
+        newWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -15).isActive = true
+        
+        // submitButtonAlert 
+        newWorkoutData.submitButton.addTarget(self, action: #selector(submitButtonSuccess), for: .touchUpInside)
+        
+        // notTodaysDateButton 
+        newWorkoutData.notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
+    }
+    
+    func submitButtonSuccess() {
+        self.dismissKeyboard()
+        let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
+            self.newWorkoutData.mileageTextField.text = ""
+            self.newWorkoutData.caloriesTextField.text = ""
+            self.newWorkoutData.minutesTextField.text = ""
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func notTodaysDate() {
+//        let alert = UIAlertController(title: "Change the date?", message: "Type in the date you worked out below", preferredStyle: UIAlertControllerStyle.alert)
+//        alert.addTextField { (monthTextField) in
+//            monthTextField.keyboardType = .numberPad
+//            monthTextField.placeholder = "MM" }
+//        alert.addTextField { (dayTextField) in
+//            dayTextField.keyboardType = .numberPad
+//            dayTextField.placeholder = "DD"
+//        }
+//        alert.addTextField { (yearTextField) in
+//            yearTextField.keyboardType = .numberPad
+//            yearTextField.placeholder = "YY"
+//        }
+//        
+//        alert.addAction(UIAlertAction(title: "Submit", style: UIAlertActionStyle.default, handler: { (_) in
+//            let monthTextField = alert.textFields![0]
+//            let dayTextField = alert.textFields![0]
+//            let yearTextField = alert.textFields![0]
+//            self.newWorkoutData.dateToSave = "\(monthTextField)/\(dayTextField)/\(yearTextField)"
+//        }))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+//        }))
+//        self.present(alert, animated: true, completion: nil)
+        
     }
     
     // Keyboard notification funcs 
@@ -162,19 +213,27 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     
     // Populate data
     func populateChartData() {
+        workoutDuration.removeAll()
+        calories.removeAll()
+        dates.removeAll()
+        miles.removeAll()
         
         DataModel.sharedInstance.fetchWorkoutData()
         workouts = DataModel.sharedInstance.workouts
-        
         for workout in workouts {
-            guard let mile = workout.mileage else { return }
+            print("CALS: \(workout.calorie)")
+            print("miles: \(workout.mileage)")
+            print("minutes: \(workout.minute)")
+            print("date: \(workout.workoutDate)")
+            guard let mile = workout.mileage else { print("core data mile error"); return }
+            guard let calorie = workout.calorie else { print("core data calories error");return }
+            guard let minute = workout.minute else { print("core data minutes error");return }
+            guard let date = workout.workoutDate else { print("core data calories error");return }
+            workoutDuration.append(minute)
+            calories.append(calorie)
+            dates.append(date)
             miles.append(mile)
         }
-        
-        workoutDuration = ["60.0", "100.0", "300.0", "90.0"]
-        dates = ["1", "2", "3", "5"]
-        miles = ["101.0", "80.0", "70.0", "200.0"]
-        calories = ["300.0", "400.0", "200.0", "100.0"]
     }
     
     // Bar chart config

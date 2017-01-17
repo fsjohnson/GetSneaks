@@ -20,6 +20,7 @@ class NewWorkoutData: UIView {
     var minutesLabel = UILabel()
     var minutesTextField = UITextField()
     var submitButton = UIButton()
+    var dateToSave = String()
     var notTodayButton = UIButton()
     
     override init(frame: CGRect) {
@@ -174,23 +175,32 @@ class NewWorkoutData: UIView {
         notTodayButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         notTodayButton.setTitle("Not today's date?", for: .normal)
         notTodayButton.setTitleColor(UIColor.themeLightGreen, for: .normal)
-        notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
         notTodayButton.titleLabel?.font = UIFont(name: "Optima-BoldItalic", size: 12.0)
+        
+        // Today's date config 
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateToSave = dateFormatter.string(from: date)
     }
     
     func saveToCoreData() {
         print("button clicked")
         let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
+        
+        // textfield data
         guard let milesToSave = mileageTextField.text else { print("error with miles from textfield"); return }
+        guard let caloriesToSave = caloriesTextField.text else { print("error with miles from textfield"); return }
+        guard let minutesToSave = minutesTextField.text else { print("error with miles from textfield"); return }
+        
         if let unwrappedEntity = entity {
             let newWorkout = Workout(context: managedContext)
             newWorkout.mileage = milesToSave
+            newWorkout.calorie = caloriesToSave
+            newWorkout.minute = minutesToSave
+            newWorkout.workoutDate = dateToSave
             DataModel.sharedInstance.saveContext()
         }
-    }
-    
-    func notTodaysDate() {
-        
     }
 }

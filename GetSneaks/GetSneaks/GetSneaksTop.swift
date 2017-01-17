@@ -31,7 +31,7 @@ class GetSneaksTop: UIView {
         // getSneaks label config
         getSneaksLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(getSneaksLabel)
-        getSneaksLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        getSneaksLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
         getSneaksLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         getSneaksLabel.text = "getSneaks?"
         getSneaksLabel.font = UIFont(name: "Optima-ExtraBlack", size: 30)
@@ -40,7 +40,7 @@ class GetSneaksTop: UIView {
         // miles completed labels
         milesCompletedTextLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(milesCompletedTextLabel)
-        milesCompletedTextLabel.topAnchor.constraint(equalTo: getSneaksLabel.bottomAnchor, constant: 8).isActive = true
+        milesCompletedTextLabel.topAnchor.constraint(equalTo: getSneaksLabel.bottomAnchor, constant: 5).isActive = true
         milesCompletedTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         milesCompletedTextLabel.text = "Miles completed in current sneaks:"
         milesCompletedTextLabel.textColor = UIColor.white
@@ -48,7 +48,7 @@ class GetSneaksTop: UIView {
         
         milesCompletedIntLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(milesCompletedIntLabel)
-        milesCompletedIntLabel.topAnchor.constraint(equalTo: getSneaksLabel.bottomAnchor, constant: 8).isActive = true
+        milesCompletedIntLabel.topAnchor.constraint(equalTo: getSneaksLabel.bottomAnchor, constant: 5).isActive = true
         milesCompletedIntLabel.leadingAnchor.constraint(equalTo: milesCompletedTextLabel.trailingAnchor, constant: 8).isActive = true
         milesCompletedIntLabel.textColor = UIColor.white
         milesCompletedIntLabel.font = UIFont(name: "Optima-Bold", size: 15)
@@ -56,7 +56,7 @@ class GetSneaksTop: UIView {
         // miles left label
         milesLeftTextLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(milesLeftTextLabel)
-        milesLeftTextLabel.topAnchor.constraint(equalTo: milesCompletedTextLabel.bottomAnchor, constant: 8).isActive = true
+        milesLeftTextLabel.topAnchor.constraint(equalTo: milesCompletedTextLabel.bottomAnchor, constant: 5).isActive = true
         milesLeftTextLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         milesLeftTextLabel.text = "Miles left in current sneaks:"
         milesLeftTextLabel.textColor = UIColor.white
@@ -64,7 +64,7 @@ class GetSneaksTop: UIView {
         
         milesLeftIntLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(milesLeftIntLabel)
-        milesLeftIntLabel.topAnchor.constraint(equalTo: milesCompletedIntLabel.bottomAnchor, constant: 8).isActive = true
+        milesLeftIntLabel.topAnchor.constraint(equalTo: milesCompletedIntLabel.bottomAnchor, constant: 5).isActive = true
         milesLeftIntLabel.leadingAnchor.constraint(equalTo: milesLeftTextLabel.trailingAnchor, constant: 8).isActive = true
         milesLeftIntLabel.textColor = UIColor.white
         milesLeftIntLabel.font = UIFont(name: "Optima-Bold", size: 15)
@@ -72,7 +72,7 @@ class GetSneaksTop: UIView {
         // History label
         historyLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(historyLabel)
-        historyLabel.topAnchor.constraint(equalTo: milesLeftTextLabel.bottomAnchor, constant: 15).isActive = true
+        historyLabel.topAnchor.constraint(equalTo: milesLeftTextLabel.bottomAnchor, constant: 10).isActive = true
         historyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         historyLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         historyLabel.text = "Workout History"
@@ -83,7 +83,7 @@ class GetSneaksTop: UIView {
 }
 
 extension GetSneaksTop {
-    fileprivate func populateMilesCompleted() {
+    func populateMilesCompleted() {
         var totalMileage = 0
         DataModel.sharedInstance.fetchWorkoutData()
         for item in DataModel.sharedInstance.workouts {
