@@ -39,9 +39,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     // Segmented controller
     var segmentedControl = UISegmentedControl(items: ["Miles", "Calories", "Minutes", "Old Sneaks"])
     
-    // Post Workout
+    // New wokrout data
     var newWorkoutData: NewWorkoutData!
-    var postWorkoutButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +55,11 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         configSegmentedControl()
         
         // Config post new workout
-        workoutButton()
         configNewWorkoutDataView()
+        
+        // Config keyboard 
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     // Config view
@@ -73,6 +75,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         
         // initial chart layout
         populateChartData()
+        getChartData(with: dates, values: miles, legend: "Miles")
         barChartConfig()
         
         // background color
@@ -109,20 +112,14 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             populateChartData()
             getChartData(with: dates, values: miles, legend: "Miles")
             barChartConfig()
-            //barChart.delegate.getChartData(with: dates, values: miles, legend: "Miles")
-            barChart.setBarChart(dataPoints: dates, values: miles, legend: "Miles")
         } else if sender.selectedSegmentIndex == 1 {
             populateChartData()
             getChartData(with: dates, values: calories, legend: "Calories")
             barChartConfig()
-            //barChart.delegate.getChartData(with: dates, values: calories, legend: "Calories")
-            barChart.setBarChart(dataPoints: dates, values: calories, legend: "Miles")
         } else if sender.selectedSegmentIndex == 2 {
             populateChartData()
             getChartData(with: dates, values: workoutDuration, legend: "Minutes")
             barChartConfig()
-            //barChart.delegate.getChartData(with: dates, values: workoutDuration, legend: "Minutes")
-            barChart.setBarChart(dataPoints: dates, values: workoutDuration, legend: "Miles")
         }
     }
     
@@ -132,25 +129,26 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(newWorkoutData)
         newWorkoutData.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 8).isActive = true
-        newWorkoutData.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        newWorkoutData.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
+        newWorkoutData.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        newWorkoutData.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
         newWorkoutData.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    // Post workout button
-    func workoutButton() {
-//        postWorkoutButton.translatesAutoresizingMaskIntoConstraints = false
-//        self.view.addSubview(postWorkoutButton)
-//        postWorkoutButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-//        postWorkoutButton.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 8).isActive = true
-//        postWorkoutButton.setTitle("Record new workout", for: .normal)
-//        postWorkoutButton.addTarget(self, action: #selector(ChartViewController.postButtonPressed), for: UIControlEvents.touchUpInside)
-//        postWorkoutButton.setTitleColor(UIColor.themeLightBlue, for: .normal)
-//        postWorkoutButton.titleLabel?.font = UIFont(name: "Optima-ExtraBlack", size: 20)
+    // Keyboard notification funcs 
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
     }
     
-    func postButtonPressed() {
-        performSegue(withIdentifier: "postWorkout", sender: self)
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
     
     // Conform to protocol
@@ -210,3 +208,20 @@ public class ChartFormatter: NSObject, IAxisValueFormatter {
         self.dates = values
     }
 }
+
+// MARK: - Hide keyboard when tap around
+extension UIViewController {
+    func hideKeyboardWhenTappedAround(isActive: Bool) {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        if isActive == true {
+            view.addGestureRecognizer(tap)
+        } else {
+            view.removeGestureRecognizer(tap)
+        }
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
