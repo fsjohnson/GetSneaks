@@ -68,10 +68,10 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         getSneaksTop = GetSneaksTop()
         getSneaksTop.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(getSneaksTop)
-        getSneaksTop.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+        getSneaksTop.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 8).isActive = true
         getSneaksTop.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         getSneaksTop.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-        getSneaksTop.heightAnchor.constraint(equalToConstant: 162).isActive = true
+        getSneaksTop.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         // initial chart layout
         populateChartData()
@@ -86,7 +86,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func configChartContainerView() {
         self.view.addSubview(chartContainerView)
         chartContainerView.translatesAutoresizingMaskIntoConstraints = false
-        chartContainerView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        chartContainerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         chartContainerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
         chartContainerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         chartContainerView.topAnchor.constraint(equalTo: getSneaksTop.bottomAnchor, constant: 0).isActive = true
@@ -97,13 +97,13 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func configSegmentedControl() {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(segmentedControl)
-        segmentedControl.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        segmentedControl.heightAnchor.constraint(equalToConstant: 15).isActive = true
         segmentedControl.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
         segmentedControl.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         segmentedControl.topAnchor.constraint(equalTo: chartContainerView.bottomAnchor, constant: 8).isActive = true
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(segmentedControlSegues), for: .valueChanged)
-        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white, NSFontAttributeName: UIFont(name: "Optima-Bold", size: 15.0)!], for: .normal)
+        segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white, NSFontAttributeName: UIFont(name: "Optima-Bold", size: 13.0)!], for: .normal)
         segmentedControl.tintColor = UIColor.white
     }
     
@@ -131,7 +131,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 8).isActive = true
         newWorkoutData.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
         newWorkoutData.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
-        newWorkoutData.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        newWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -8).isActive = true
     }
     
     // Keyboard notification funcs 
@@ -181,7 +181,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func barChartConfig() {
         self.chartContainerView.addSubview(barChart)
         barChart.translatesAutoresizingMaskIntoConstraints = false
-        barChart.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        barChart.heightAnchor.constraint(equalToConstant: 200).isActive = true
         barChart.widthAnchor.constraint(equalTo: chartContainerView.widthAnchor, constant: -20).isActive = true
         barChart.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 0).isActive = true
         barChart.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor).isActive = true

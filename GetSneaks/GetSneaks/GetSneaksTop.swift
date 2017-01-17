@@ -34,7 +34,7 @@ class GetSneaksTop: UIView {
         getSneaksLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         getSneaksLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         getSneaksLabel.text = "getSneaks?"
-        getSneaksLabel.font = UIFont(name: "Optima-ExtraBlack", size: 40)
+        getSneaksLabel.font = UIFont(name: "Optima-ExtraBlack", size: 30)
         getSneaksLabel.textColor = UIColor.themeLightBlue
         
         // miles completed labels
@@ -74,10 +74,10 @@ class GetSneaksTop: UIView {
         self.addSubview(historyLabel)
         historyLabel.topAnchor.constraint(equalTo: milesLeftTextLabel.bottomAnchor, constant: 15).isActive = true
         historyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        historyLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        historyLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         historyLabel.text = "Workout History"
         historyLabel.backgroundColor = UIColor.themeMediumBlue
-        historyLabel.font = UIFont(name: "Optima-ExtraBlack", size: 25)
+        historyLabel.font = UIFont(name: "Optima-ExtraBlack", size: 20)
         historyLabel.textColor = UIColor.themeLightBlue
     }
 }
