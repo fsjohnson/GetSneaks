@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		25FD7E3854CBFAD570A4BDD3 /* Pods_GetSneaks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93807EFFDE2A6C615273CC6 /* Pods_GetSneaks.framework */; };
 		B50FA6A01E295662006D713A /* GetSneaksTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50FA69F1E295662006D713A /* GetSneaksTop.swift */; };
+		B5152F441E2ED52400B9022A /* ChangeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5152F431E2ED52400B9022A /* ChangeDate.swift */; };
 		B51EC0EF1E27FAF7004B0FBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC0EE1E27FAF7004B0FBA /* AppDelegate.swift */; };
 		B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC0F01E27FAF7004B0FBA /* DataModel.swift */; };
 		B51EC0F41E27FAF7004B0FBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B51EC0F21E27FAF7004B0FBA /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		776F9B141B3B19FE158E87A5 /* Pods-GetSneaks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GetSneaks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GetSneaks/Pods-GetSneaks.debug.xcconfig"; sourceTree = "<group>"; };
 		A93807EFFDE2A6C615273CC6 /* Pods_GetSneaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GetSneaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50FA69F1E295662006D713A /* GetSneaksTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSneaksTop.swift; sourceTree = "<group>"; };
+		B5152F431E2ED52400B9022A /* ChangeDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeDate.swift; sourceTree = "<group>"; };
 		B51EC0EB1E27FAF7004B0FBA /* GetSneaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetSneaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51EC0EE1E27FAF7004B0FBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B51EC0F01E27FAF7004B0FBA /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				B50FA69F1E295662006D713A /* GetSneaksTop.swift */,
 				B51EC1001E27FBD7004B0FBA /* BarChart.swift */,
 				B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */,
+				B5152F431E2ED52400B9022A /* ChangeDate.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */,
+				B5152F441E2ED52400B9022A /* ChangeDate.swift in Sources */,
 				B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */,
 				B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */,
 				B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 import Charts
 import Foundation
 import CoreData
+import EventKit
 
 protocol GetChartData {
     func getChartData(with dataPoints: [String], values: [String], legend: String)
@@ -41,6 +42,12 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     
     // New wokrout data
     var newWorkoutData: NewWorkoutData!
+    
+    // Change date
+    var changeDate: ChangeDate!
+    let datePickerView = UIDatePicker()
+    var backgroundView = UIView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,29 +167,46 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     }
     
     func notTodaysDate() {
-//        let alert = UIAlertController(title: "Change the date?", message: "Type in the date you worked out below", preferredStyle: UIAlertControllerStyle.alert)
-//        alert.addTextField { (monthTextField) in
-//            monthTextField.keyboardType = .numberPad
-//            monthTextField.placeholder = "MM" }
-//        alert.addTextField { (dayTextField) in
-//            dayTextField.keyboardType = .numberPad
-//            dayTextField.placeholder = "DD"
-//        }
-//        alert.addTextField { (yearTextField) in
-//            yearTextField.keyboardType = .numberPad
-//            yearTextField.placeholder = "YY"
-//        }
-//        
-//        alert.addAction(UIAlertAction(title: "Submit", style: UIAlertActionStyle.default, handler: { (_) in
-//            let monthTextField = alert.textFields![0]
-//            let dayTextField = alert.textFields![0]
-//            let yearTextField = alert.textFields![0]
-//            self.newWorkoutData.dateToSave = "\(monthTextField)/\(dayTextField)/\(yearTextField)"
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-//        }))
-//        self.present(alert, animated: true, completion: nil)
+        // background View
+        self.view.addSubview(backgroundView)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         
+        //change date view
+        changeDate = ChangeDate()
+        self.view.addSubview(changeDate)
+        changeDate.translatesAutoresizingMaskIntoConstraints = false
+        changeDate.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        changeDate.widthAnchor.constraint(equalTo: chartContainerView.widthAnchor, constant: -20).isActive = true
+        changeDate.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        changeDate.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        self.datePickerView.datePickerMode = UIDatePickerMode.date
+        changeDate.changeDateTextField.inputView = self.datePickerView
+        self.datePickerView.addTarget(self, action: #selector(self.datePickerValueChanged), for: .valueChanged)
+        self.changeDate.submitButton.addTarget(self, action: #selector(submitButton), for: .touchUpInside)
+        self.changeDate.cancelButton.addTarget(self, action: #selector(cancelButton), for: .touchUpInside)
+        changeDate.layer.cornerRadius = 4.0
+    }
+    
+    func datePickerValueChanged(sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/DD/YY"
+        newWorkoutData.dateToSave = dateFormatter.string(from: sender.date)
+        changeDate.changeDateTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    func submitButton() {
+        backgroundView.removeFromSuperview()
+        changeDate.removeFromSuperview()
+    }
+    
+    func cancelButton() {
+        backgroundView.removeFromSuperview()
+        changeDate.removeFromSuperview()
     }
     
     // Keyboard notification funcs 

@@ -82,7 +82,7 @@ class BarChart: UIView {
         barChartView.xAxis.drawGridLinesEnabled = false // true if want X-Axis grid lines
         barChartView.xAxis.valueFormatter = xaxis.valueFormatter
         barChartView.chartDescription?.enabled = false
-        barChartView.legend.enabled = true
+        barChartView.legend.enabled = false
         barChartView.rightAxis.enabled = false
         barChartView.leftAxis.drawGridLinesEnabled = false // true if want Y-Axis grid lines
         barChartView.leftAxis.drawLabelsEnabled = true
@@ -94,5 +94,7 @@ class BarChart: UIView {
         barChartView.barData?.setValueTextColor(UIColor.white)
         barChartView.leftAxis.labelTextColor = UIColor.white
         barChartView.xAxis.granularity = 1
+        barChartView.xAxis.wordWrapEnabled = false
+        barChartView.xAxis.labelRotationAngle = 270
     }
 }

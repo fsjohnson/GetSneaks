@@ -180,7 +180,7 @@ class NewWorkoutData: UIView {
         // Today's date config 
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = "MM/DD/YY"
         dateToSave = dateFormatter.string(from: date)
     }
     
