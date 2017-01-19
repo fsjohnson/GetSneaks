@@ -68,8 +68,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         hideKeyboardWhenTappedAround(isActive: true)
-        
-        print("DATES: \(dates)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -244,11 +242,12 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         
         DataModel.sharedInstance.fetchWorkoutData()
         workouts = DataModel.sharedInstance.workouts
+        
+        workouts.sort { (workoutOne, workoutTwo) -> Bool in
+            workoutOne.workoutDate! < workoutTwo.workoutDate!
+        }
+        
         for workout in workouts {
-            print("CALS: \(workout.calorie)")
-            print("miles: \(workout.mileage)")
-            print("minutes: \(workout.minute)")
-            print("date: \(workout.workoutDate)")
             guard let mile = workout.mileage else { print("core data mile error"); return }
             guard let calorie = workout.calorie else { print("core data calories error");return }
             guard let minute = workout.minute else { print("core data minutes error");return }
