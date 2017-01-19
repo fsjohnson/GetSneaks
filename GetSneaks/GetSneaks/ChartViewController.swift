@@ -48,15 +48,17 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     let datePickerView = UIDatePicker()
     var backgroundView = UIView()
     
+    // No data
+    var noWorkoutData = NoWorkoutData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Config view
         configLayout()
-
-        // Config container view
-        configChartContainerView()
+        
+        // initial chart layout
+        initialLayout()
         
         // Config segmented control
         configSegmentedControl()
@@ -64,7 +66,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         // Config post new workout
         configNewWorkoutDataView()
         
-        // Config keyboard 
+        // Config keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         hideKeyboardWhenTappedAround(isActive: true)
@@ -72,7 +74,16 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         populateChartData()
-        getSneaksTop.populateMilesCompleted()
+        if workouts.count == 0 {
+            noDataConfig()
+        } else {
+            if chartContainerView.subviews.contains(noWorkoutData) {
+                noWorkoutData.removeFromSuperview()
+            }
+            getChartData(with: dates, values: miles, legend: "Miles")
+            barChartConfig()
+            getSneaksTop.populateMilesCompleted()
+        }
     }
     
     // Config view
@@ -86,13 +97,20 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         getSneaksTop.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
         getSneaksTop.heightAnchor.constraint(equalToConstant: 130).isActive = true
         
-        // initial chart layout
-        populateChartData()
-        getChartData(with: dates, values: miles, legend: "Miles")
-        barChartConfig()
-        
         // background color
         self.view.backgroundColor = UIColor.themeMediumBlue
+    }
+    
+    // Initial layout config
+    func initialLayout() {
+        configChartContainerView()
+        populateChartData()
+        if workouts.count == 0 {
+            noDataConfig()
+        } else {
+            getChartData(with: dates, values: miles, legend: "Miles")
+            barChartConfig()
+        }
     }
     
     // Container view for charts
@@ -136,7 +154,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         }
     }
     
-    // New workout data viw 
+    // New workout data viw
     func configNewWorkoutDataView() {
         newWorkoutData = NewWorkoutData()
         newWorkoutData.translatesAutoresizingMaskIntoConstraints = false
@@ -146,10 +164,10 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
         newWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -15).isActive = true
         
-        // submitButtonAlert 
+        // submitButtonAlert
         newWorkoutData.submitButton.addTarget(self, action: #selector(submitButtonSuccess), for: .touchUpInside)
         
-        // notTodaysDateButton 
+        // notTodaysDateButton
         newWorkoutData.notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
     }
     
@@ -207,7 +225,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         changeDate.removeFromSuperview()
     }
     
-    // Keyboard notification funcs 
+    // Keyboard notification funcs
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -246,7 +264,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         workouts.sort { (workoutOne, workoutTwo) -> Bool in
             workoutOne.workoutDate! < workoutTwo.workoutDate!
         }
-        
         for workout in workouts {
             guard let mile = workout.mileage else { print("core data mile error"); return }
             guard let calorie = workout.calorie else { print("core data calories error");return }
@@ -257,6 +274,16 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             dates.append(date)
             miles.append(mile)
         }
+    }
+    
+    // No data config
+    func noDataConfig() {
+        self.chartContainerView.addSubview(noWorkoutData)
+        noWorkoutData.translatesAutoresizingMaskIntoConstraints = false
+        noWorkoutData.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        noWorkoutData.widthAnchor.constraint(equalTo: chartContainerView.widthAnchor, constant: -20).isActive = true
+        noWorkoutData.topAnchor.constraint(equalTo: chartContainerView.topAnchor, constant: 0).isActive = true
+        noWorkoutData.centerXAnchor.constraint(equalTo: chartContainerView.centerXAnchor).isActive = true
     }
     
     // Bar chart config

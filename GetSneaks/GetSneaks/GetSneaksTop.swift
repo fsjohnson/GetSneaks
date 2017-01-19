@@ -84,6 +84,7 @@ class GetSneaksTop: UIView {
 
 extension GetSneaksTop {
     func populateMilesCompleted() {
+        print("POPULATING DATA")
         var totalMileage = 0
         DataModel.sharedInstance.fetchWorkoutData()
         for item in DataModel.sharedInstance.workouts {

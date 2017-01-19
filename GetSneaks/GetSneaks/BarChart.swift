@@ -59,7 +59,7 @@ class BarChart: UIView {
         // No data setup
         barChartView.noDataTextColor = UIColor.white
         barChartView.noDataText = "No data for the chart."
-        barChartView.backgroundColor = UIColor.white
+        barChartView.backgroundColor = UIColor.themeMediumBlue
         
         // Data point setup & color config
         for i in 0..<dataPoints.count {
