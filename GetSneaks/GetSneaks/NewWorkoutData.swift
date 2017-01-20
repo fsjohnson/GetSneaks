@@ -163,7 +163,6 @@ class NewWorkoutData: UIView {
         submitButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         submitButton.setTitle("Submit", for: .normal)
         submitButton.setTitleColor(UIColor.white, for: .normal)
-        submitButton.addTarget(self, action: #selector(saveToCoreData), for: .touchUpInside)
         submitButton.titleLabel?.font = UIFont(name: "Optima-Bold", size: 15.0)
         
         // Not today button config

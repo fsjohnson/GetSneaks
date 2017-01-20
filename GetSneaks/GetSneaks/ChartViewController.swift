@@ -154,7 +154,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         }
     }
     
-    // New workout data viw
+    // New workout data view
     func configNewWorkoutDataView() {
         newWorkoutData = NewWorkoutData()
         newWorkoutData.translatesAutoresizingMaskIntoConstraints = false
@@ -165,14 +165,32 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -15).isActive = true
         
         // submitButtonAlert
-        newWorkoutData.submitButton.addTarget(self, action: #selector(submitButtonSuccess), for: .touchUpInside)
+        newWorkoutData.submitButton.addTarget(self, action: #selector(workoutAreYouSureAlert), for: .touchUpInside)
         
         // notTodaysDateButton
         newWorkoutData.notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
     }
     
-    func submitButtonSuccess() {
+    func workoutAreYouSureAlert() {
         self.dismissKeyboard()
+        if (newWorkoutData.caloriesTextField.text == "") || (newWorkoutData.mileageTextField.text == "") || (newWorkoutData.minutesTextField.text == "") {
+            let alert = UIAlertController(title: "Oops!", message: "Please fill out all the fields", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Are you sure?", message: "Do you want to save this workout", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                self.newWorkoutData.saveToCoreData()
+                self.submitButtonSuccess()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func submitButtonSuccess() {
         let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
             self.newWorkoutData.mileageTextField.text = ""
@@ -216,8 +234,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     }
     
     func submitButton() {
-        backgroundView.removeFromSuperview()
-        changeDate.removeFromSuperview()
+        self.backgroundView.removeFromSuperview()
+        self.changeDate.removeFromSuperview()
     }
     
     func cancelButton() {
@@ -308,11 +326,9 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
 public class ChartFormatter: NSObject, IAxisValueFormatter {
     
     var dates = [String]()
-    
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return dates[Int(value)]
     }
-    
     public func setValues(values: [String]) {
         self.dates = values
     }
