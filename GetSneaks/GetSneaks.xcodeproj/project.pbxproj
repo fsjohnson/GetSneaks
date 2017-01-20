@@ -19,6 +19,8 @@
 		B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */; };
 		B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1041E27FBDF004B0FBA /* CustomColor.swift */; };
 		B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B51EC10D1E283D0B004B0FBA /* DataModel.xcdatamodeld */; };
+		B56F1F811E325140006CB722 /* OldSneaksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F1F801E325140006CB722 /* OldSneaksTableViewController.swift */; };
+		B56F1F831E3255B2006CB722 /* OldSneaksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */; };
 		B5910C531E30419000144F66 /* NoWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5910C521E30419000144F66 /* NoWorkoutData.swift */; };
 		B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B51EC1041E27FBDF004B0FBA /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		B51EC10E1E283D0B004B0FBA /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		B56F1F801E325140006CB722 /* OldSneaksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSneaksTableViewController.swift; sourceTree = "<group>"; };
+		B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSneaksTableViewCell.swift; sourceTree = "<group>"; };
 		B5910C521E30419000144F66 /* NoWorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWorkoutData.swift; sourceTree = "<group>"; };
 		B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWorkoutData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +110,7 @@
 				B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */,
 				B5152F431E2ED52400B9022A /* ChangeDate.swift */,
 				B5910C521E30419000144F66 /* NoWorkoutData.swift */,
+				B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -114,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */,
+				B56F1F801E325140006CB722 /* OldSneaksTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -268,11 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56F1F811E325140006CB722 /* OldSneaksTableViewController.swift in Sources */,
 				B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */,
 				B5152F441E2ED52400B9022A /* ChangeDate.swift in Sources */,
 				B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */,
 				B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */,
 				B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */,
+				B56F1F831E3255B2006CB722 /* OldSneaksTableViewCell.swift in Sources */,
 				B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */,
 				B5910C531E30419000144F66 /* NoWorkoutData.swift in Sources */,
 				B51EC1011E27FBD7004B0FBA /* BarChart.swift in Sources */,

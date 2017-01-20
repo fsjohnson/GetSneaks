@@ -80,6 +80,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             if chartContainerView.subviews.contains(noWorkoutData) {
                 noWorkoutData.removeFromSuperview()
             }
+            segmentedControl.selectedSegmentIndex = 0
             getChartData(with: dates, values: miles, legend: "Miles")
             barChartConfig()
             getSneaksTop.populateMilesCompleted()
@@ -151,6 +152,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             populateChartData()
             getChartData(with: dates, values: workoutDuration, legend: "Minutes")
             barChartConfig()
+        } else if sender.selectedSegmentIndex == 3 {
+            performSegue(withIdentifier: "previousWorkouts", sender: self)
         }
     }
     
