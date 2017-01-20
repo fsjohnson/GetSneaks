@@ -184,7 +184,6 @@ class NewWorkoutData: UIView {
     }
     
     func saveToCoreData() {
-        print("button clicked")
         let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
         

@@ -89,10 +89,10 @@ class BarChart: UIView {
         barChartView.data = chartData
         barChartView.backgroundColor = UIColor.themeMediumBlue
         barChartView.xAxis.labelTextColor = UIColor.white
-        barChartView.legend.textColor = UIColor.white
-        barChartView.legend.font = UIFont(name: "Optima-Bold", size: 12)!
+        barChartView.xAxis.labelFont = UIFont(name: "Optima-Bold", size: 11)!
         barChartView.barData?.setValueTextColor(UIColor.white)
         barChartView.leftAxis.labelTextColor = UIColor.white
+        barChartView.leftAxis.labelFont = UIFont(name: "Optima-Bold", size: 11)!
         barChartView.xAxis.granularity = 1
         barChartView.xAxis.wordWrapEnabled = false
         barChartView.xAxis.labelRotationAngle = 270
