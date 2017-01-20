@@ -194,6 +194,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
             self.getSneaksTop.populateMilesCompleted()
+            self.populateChartData()
+            self.barChartConfig()
             self.newWorkoutData.mileageTextField.text = ""
             self.newWorkoutData.caloriesTextField.text = ""
             self.newWorkoutData.minutesTextField.text = ""
