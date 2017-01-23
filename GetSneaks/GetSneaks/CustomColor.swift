@@ -1,10 +1,9 @@
 //
 //  CustomColor.swift
-//  Studio
+//  GetSneaks
 //
-//  Created by Felicity Johnson on 1/5/17.
+//  Created by Felicity Johnson on 1/12/17.
 //  Copyright © 2017 FJ. All rights reserved.
-//
 
 import Foundation
 import UIKit

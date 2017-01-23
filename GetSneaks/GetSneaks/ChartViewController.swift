@@ -66,6 +66,9 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         // Config post new workout
         configNewWorkoutDataView()
         
+        // Check if need new sneaks
+        needNewSneaksAlert()
+        
         // Config keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -84,6 +87,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             getChartData(with: dates, values: miles, legend: "Miles")
             barChartConfig()
             getSneaksTop.populateMilesCompleted()
+            needNewSneaksAlert()
         }
     }
     
@@ -206,6 +210,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         self.present(alert, animated: true, completion: nil)
     }
     
+    // Change date before submitting workout
     func notTodaysDate() {
         // background View
         self.view.addSubview(backgroundView)
@@ -216,7 +221,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         
-        //change date view
+        // Change date view
         changeDate = ChangeDate()
         self.view.addSubview(changeDate)
         changeDate.translatesAutoresizingMaskIntoConstraints = false
@@ -247,6 +252,31 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func cancelButton() {
         backgroundView.removeFromSuperview()
         changeDate.removeFromSuperview()
+    }
+    
+    // Check if time for new sneaks
+    func needNewSneaksAlert() {
+        if getSneaksTop.alertNeedNewSneaks(with: getSneaksTop.populateMilesCompleted()!) == true {
+            let alert = UIAlertController(title: "Nice job!", message: "You have reach 400 mi in your current sneakers. Time to get some fresh sneaks!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
+                self.savePreviousWorkoutAndDeleteCurrent()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func savePreviousWorkoutAndDeleteCurrent() {
+        print("SAVING AND REMOVING CORE DATA")
+        
+        // Today's date config
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/DD/YY"
+        let dateToSave = dateFormatter.string(from: date)
+        let workoutData = WorkoutData(mileage: miles, calorie: calories, workoutDate: dates, minute: workoutDuration, newSneaksDate: "today")
+        FirebaseMethods.sendPreviousWorkoutData(with: workoutData)
+        DataModel.sharedInstance.deleteWorkoutData()
     }
     
     // Keyboard notification funcs

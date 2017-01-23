@@ -19,6 +19,12 @@
 		B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */; };
 		B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51EC1041E27FBDF004B0FBA /* CustomColor.swift */; };
 		B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B51EC10D1E283D0B004B0FBA /* DataModel.xcdatamodeld */; };
+		B55073251E3551B600AAC60C /* WorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55073241E3551B600AAC60C /* WorkoutData.swift */; };
+		B55073271E35BFE700AAC60C /* FirebaseMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55073261E35BFE700AAC60C /* FirebaseMethods.swift */; };
+		B55073291E35C22D00AAC60C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55073281E35C22D00AAC60C /* GoogleService-Info.plist */; };
+		B550732B1E35C2B400AAC60C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550732A1E35C2B400AAC60C /* User.swift */; };
+		B550732D1E35C34800AAC60C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550732C1E35C34800AAC60C /* LoginViewController.swift */; };
+		B550732F1E35C3E300AAC60C /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550732E1E35C3E300AAC60C /* CustomTextField.swift */; };
 		B56F1F811E325140006CB722 /* OldSneaksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F1F801E325140006CB722 /* OldSneaksTableViewController.swift */; };
 		B56F1F831E3255B2006CB722 /* OldSneaksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */; };
 		B5910C531E30419000144F66 /* NoWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5910C521E30419000144F66 /* NoWorkoutData.swift */; };
@@ -42,6 +48,12 @@
 		B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B51EC1041E27FBDF004B0FBA /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		B51EC10E1E283D0B004B0FBA /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		B55073241E3551B600AAC60C /* WorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutData.swift; sourceTree = "<group>"; };
+		B55073261E35BFE700AAC60C /* FirebaseMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseMethods.swift; sourceTree = "<group>"; };
+		B55073281E35C22D00AAC60C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B550732A1E35C2B400AAC60C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B550732C1E35C34800AAC60C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B550732E1E35C3E300AAC60C /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B56F1F801E325140006CB722 /* OldSneaksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSneaksTableViewController.swift; sourceTree = "<group>"; };
 		B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSneaksTableViewCell.swift; sourceTree = "<group>"; };
 		B5910C521E30419000144F66 /* NoWorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWorkoutData.swift; sourceTree = "<group>"; };
@@ -97,6 +109,7 @@
 				B51EC0F21E27FAF7004B0FBA /* Main.storyboard */,
 				B51EC0F51E27FAF7004B0FBA /* Assets.xcassets */,
 				B51EC0F71E27FAF7004B0FBA /* LaunchScreen.storyboard */,
+				B55073281E35C22D00AAC60C /* GoogleService-Info.plist */,
 				B51EC0FA1E27FAF7004B0FBA /* Info.plist */,
 			);
 			path = GetSneaks;
@@ -120,6 +133,7 @@
 			children = (
 				B51EC1021E27FBDF004B0FBA /* ChartViewController.swift */,
 				B56F1F801E325140006CB722 /* OldSneaksTableViewController.swift */,
+				B550732C1E35C34800AAC60C /* LoginViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -129,6 +143,7 @@
 			children = (
 				B51EC10D1E283D0B004B0FBA /* DataModel.xcdatamodeld */,
 				B51EC0EE1E27FAF7004B0FBA /* AppDelegate.swift */,
+				B550732E1E35C3E300AAC60C /* CustomTextField.swift */,
 				B51EC1041E27FBDF004B0FBA /* CustomColor.swift */,
 			);
 			name = Other;
@@ -138,6 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				B51EC0F01E27FAF7004B0FBA /* DataModel.swift */,
+				B55073261E35BFE700AAC60C /* FirebaseMethods.swift */,
+				B55073241E3551B600AAC60C /* WorkoutData.swift */,
+				B550732A1E35C2B400AAC60C /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -216,6 +234,7 @@
 				B51EC0F91E27FAF7004B0FBA /* LaunchScreen.storyboard in Resources */,
 				B51EC0F61E27FAF7004B0FBA /* Assets.xcassets in Resources */,
 				B51EC0F41E27FAF7004B0FBA /* Main.storyboard in Resources */,
+				B55073291E35C22D00AAC60C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,12 +296,17 @@
 				B56F1F811E325140006CB722 /* OldSneaksTableViewController.swift in Sources */,
 				B51EC0F11E27FAF7004B0FBA /* DataModel.swift in Sources */,
 				B5152F441E2ED52400B9022A /* ChangeDate.swift in Sources */,
+				B55073251E3551B600AAC60C /* WorkoutData.swift in Sources */,
 				B51EC10F1E283D0B004B0FBA /* DataModel.xcdatamodeld in Sources */,
+				B55073271E35BFE700AAC60C /* FirebaseMethods.swift in Sources */,
 				B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */,
 				B51EC1071E27FBDF004B0FBA /* CustomColor.swift in Sources */,
+				B550732F1E35C3E300AAC60C /* CustomTextField.swift in Sources */,
+				B550732B1E35C2B400AAC60C /* User.swift in Sources */,
 				B56F1F831E3255B2006CB722 /* OldSneaksTableViewCell.swift in Sources */,
 				B51EC1051E27FBDF004B0FBA /* ChartViewController.swift in Sources */,
 				B5910C531E30419000144F66 /* NoWorkoutData.swift in Sources */,
+				B550732D1E35C34800AAC60C /* LoginViewController.swift in Sources */,
 				B51EC1011E27FBD7004B0FBA /* BarChart.swift in Sources */,
 				B51EC0EF1E27FAF7004B0FBA /* AppDelegate.swift in Sources */,
 				B50FA6A01E295662006D713A /* GetSneaksTop.swift in Sources */,

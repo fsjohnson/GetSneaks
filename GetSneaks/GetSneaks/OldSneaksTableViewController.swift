@@ -8,34 +8,54 @@
 
 import UIKit
 
-class OldSneaksTableViewController: UITableViewController {
-
+class OldSneaksTableViewController: UITableViewController, GetChartData {
+    
+    var workoutData = [WorkoutData]()
+    var newSneaksDates = String()
+    var workoutDuration = [String]()
+    var calories = [String]()
+    var dates = [String]()
+    var miles = [String]()
+    var legend = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchPreviousWorkouts()
+        print("WORKOUT COUNT: \(workoutData.count)")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // Fetch data
+    func fetchPreviousWorkouts() {
+        FirebaseMethods.retrievePreviousWorkouts { (savedWorkoutData) in
+            self.workoutData = savedWorkoutData
+        }
+        for item in workoutData {
+            print("WORKOUT DATA: \(item)")
+            //getChartData(with: item.workoutDate, values: item.mileage, legend: "Miles")
+        }
     }
-
+    
+    // Conform to protocol
+    func getChartData(with dataPoints: [String], values: [String], legend: String) {
+        self.workoutDuration = values
+        self.miles = values
+        self.calories = values
+        self.dates = dataPoints
+        self.legend = legend
+    }
+    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return workoutData.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "oldSneak", for: indexPath) as! OldSneaksTableViewCell
-
-        // Configure the cell...
-
+        cell.barChart.delegate = self
         return cell
     }
     

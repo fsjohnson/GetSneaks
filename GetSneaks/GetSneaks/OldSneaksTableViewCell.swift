@@ -27,7 +27,6 @@ class OldSneaksTableViewCell: UITableViewCell {
     }
     
     private func configCell() {
-        print("TABLE CELL CONFIG")
         // background color
         self.backgroundColor = UIColor.themeMediumBlue
         

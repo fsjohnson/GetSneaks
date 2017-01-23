@@ -83,20 +83,28 @@ class GetSneaksTop: UIView {
 }
 
 extension GetSneaksTop {
-    func populateMilesCompleted() {
+    func populateMilesCompleted() -> Int? {
         var totalMileage = 0
         DataModel.sharedInstance.fetchWorkoutData()
         for item in DataModel.sharedInstance.workouts {
-            guard let mile = item.mileage else { print("error retrieving core data miles"); return }
-            guard let doubleMile = Int(mile) else { print("problem casting core data mile as int"); return }
+            guard let mile = item.mileage else { print("error retrieving core data miles"); return nil}
+            guard let doubleMile = Int(mile) else { print("problem casting core data mile as int"); return nil}
             totalMileage += doubleMile
         }
         milesCompletedIntLabel.text = "\(totalMileage) mi"
         populateMilesLeft(from: totalMileage)
+        return totalMileage
     }
     
     private func populateMilesLeft(from completedMiles: Int) {
         let milesLeft = 400 - completedMiles
         milesLeftIntLabel.text = "\(milesLeft) mi"
+    }
+    
+    func alertNeedNewSneaks(with totalMileage: Int) -> Bool {
+        if totalMileage >= 400 {
+            return true
+        }
+        return false
     }
 }
