@@ -33,7 +33,7 @@ class GetSneaksTop: UIView {
         self.addSubview(getSneaksLabel)
         getSneaksLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
         getSneaksLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        getSneaksLabel.text = "getSneaks?"
+        getSneaksLabel.text = "Get Sneaks?"
         getSneaksLabel.font = UIFont(name: "Optima-ExtraBlack", size: 30)
         getSneaksLabel.textColor = UIColor.themeLightBlue
         

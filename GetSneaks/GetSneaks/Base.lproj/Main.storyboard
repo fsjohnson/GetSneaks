@@ -51,7 +51,7 @@
             </objects>
             <point key="canvasLocation" x="-681" y="112"/>
         </scene>
-        <!--previousWorkouts-->
+        <!--Previous Workouts-->
         <scene sceneID="FNR-gw-BQr">
             <objects>
                 <tableViewController id="Szm-TP-BCs" customClass="OldSneaksTableViewController" customModule="GetSneaks" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,7 +64,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KFe-k6-h3s" id="5xR-aJ-0q1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -74,7 +74,7 @@
                             <outlet property="delegate" destination="Szm-TP-BCs" id="6p1-fT-oPS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="previousWorkouts" id="OPz-6H-kvS">
+                    <navigationItem key="navigationItem" title="Previous Workouts" id="OPz-6H-kvS">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="zZm-EB-IRj">
                             <connections>
                                 <action selector="backButton:" destination="Szm-TP-BCs" id="9kf-sK-Ivc"/>
