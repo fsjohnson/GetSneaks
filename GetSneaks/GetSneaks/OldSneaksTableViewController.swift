@@ -21,17 +21,17 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchPreviousWorkouts()
-        print("WORKOUT COUNT: \(workoutData.count)")
     }
     
     // Fetch data
     func fetchPreviousWorkouts() {
         FirebaseMethods.retrievePreviousWorkouts { (savedWorkoutData) in
             self.workoutData = savedWorkoutData
-        }
-        for item in workoutData {
-            print("WORKOUT DATA: \(item)")
-            //getChartData(with: item.workoutDate, values: item.mileage, legend: "Miles")
+            self.workoutData.sorted(by: { (workoutOne, workoutTwo) -> Bool in
+                workoutOne.newSneaksDate < workoutTwo.newSneaksDate
+            })
+            
+            self.tableView.reloadData()
         }
     }
     
@@ -55,7 +55,13 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "oldSneak", for: indexPath) as! OldSneaksTableViewCell
+        getChartData(with: workoutData[indexPath.row].workoutDate, values: workoutData[indexPath.row].mileage, legend: "Miles")
+        cell.workout = workoutData[indexPath.row]
         cell.barChart.delegate = self
+        cell.barChart.barChartView.legend.enabled = true
+        cell.barChart.barChartView.legend.font = UIFont(name: "Optima-Bold", size: 11)!
+        cell.barChart.barChartView.legend.textColor = UIColor.white
+        cell.isUserInteractionEnabled = false 
         return cell
     }
     

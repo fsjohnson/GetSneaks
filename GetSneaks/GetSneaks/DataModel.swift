@@ -15,7 +15,6 @@ class DataModel {
     private let name = "DataModel"
     private init() {}
     var workouts = [Workout]()
-    var previousWorkouts = [PreviousWorkout]()
     var oldWorkouts = [WorkoutData]()
     
     // MARK: - Core Data stack
@@ -56,27 +55,6 @@ class DataModel {
         do {
             self.workouts = try context.fetch(fetchRequest)
             for object in workouts {
-                context.delete(object)
-                try context.save()
-            }
-        } catch {}
-    }
-    
-    //MARK: - Previous workout Core Data
-    func previousWorkoutFetchWorkoutData() {
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<PreviousWorkout>(entityName: "PreviousWorkout")
-        do {
-            self.previousWorkouts = try managedContext.fetch(fetchRequest)
-        } catch {}
-    }
-    
-    func previousWorkoutDeleteWorkoutData() {
-        let context = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<PreviousWorkout>(entityName: "PreviousWorkout")
-        do {
-            self.previousWorkouts = try context.fetch(fetchRequest)
-            for object in previousWorkouts {
                 context.delete(object)
                 try context.save()
             }

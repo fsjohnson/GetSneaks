@@ -36,6 +36,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     var workouts = [Workout]()
     var chartContainerView = UIView()
     let barChart = BarChart()
+    let dateFormatter = DateFormatter()
     
     // Segmented controller
     var segmentedControl = UISegmentedControl(items: ["Miles", "Calories", "Minutes", "Old Sneaks"])
@@ -77,13 +78,13 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         populateChartData()
+        segmentedControl.selectedSegmentIndex = 0
         if workouts.count == 0 {
             noDataConfig()
         } else {
             if chartContainerView.subviews.contains(noWorkoutData) {
                 noWorkoutData.removeFromSuperview()
             }
-            segmentedControl.selectedSegmentIndex = 0
             getChartData(with: dates, values: miles, legend: "Miles")
             barChartConfig()
             getSneaksTop.populateMilesCompleted()
@@ -206,6 +207,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             self.newWorkoutData.mileageTextField.text = ""
             self.newWorkoutData.caloriesTextField.text = ""
             self.newWorkoutData.minutesTextField.text = ""
+            self.needNewSneaksAlert()
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -238,7 +240,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     }
     
     func datePickerValueChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/DD/YY"
         newWorkoutData.dateToSave = dateFormatter.string(from: sender.date)
         changeDate.changeDateTextField.text = dateFormatter.string(from: sender.date)
@@ -267,15 +268,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     }
     
     func savePreviousWorkoutAndDeleteCurrent() {
-        print("SAVING AND REMOVING CORE DATA")
-        
-        // Today's date config
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/DD/YY"
-        let dateToSave = dateFormatter.string(from: date)
-        let workoutData = WorkoutData(mileage: miles, calorie: calories, workoutDate: dates, minute: workoutDuration, newSneaksDate: "today")
-        FirebaseMethods.sendPreviousWorkoutData(with: workoutData)
+        DataModel.sharedInstance.fetchWorkoutData()
+        FirebaseMethods.sendPreviousWorkoutData(with: DataModel.sharedInstance.workouts)
         DataModel.sharedInstance.deleteWorkoutData()
     }
     

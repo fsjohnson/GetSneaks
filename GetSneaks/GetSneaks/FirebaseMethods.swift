@@ -48,18 +48,32 @@ struct FirebaseMethods {
     
     // MARK: - Send workout data to firebase 
     
-    static func sendPreviousWorkoutData(with previousWorkout: WorkoutData) {
+    static func sendPreviousWorkoutData(with previousWorkouts: [Workout]) {
         guard let currentUser = FIRAuth.auth()?.currentUser?.uid else { return }
         let ref = FIRDatabase.database().reference().child("users").child(currentUser).child("previousWorkouts")
-        let workoutID = FIRDatabase.database().reference().childByAutoId()
+        let workoutID = FIRDatabase.database().reference().childByAutoId().key
+        var miles = [String]()
+        var dates = [String]()
+        var calories = [String]()
+        var minutes = [String]()
         
-        print("miles : \(previousWorkout.mileage)")
-        print("cals : \(previousWorkout.calorie)")
-        print("mins : \(previousWorkout.minute)")
-        print("dates : \(previousWorkout.workoutDate)")
-        print("new sneaks : \(previousWorkout.newSneaksDate)")
+        // Today's date config
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/DD/YY"
+        let dateToSave = dateFormatter.string(from: date)
         
-        ref.updateChildValues([workoutID: ["miles": previousWorkout.mileage, "calories": previousWorkout.calorie, "minutes": previousWorkout.minute, "dates": previousWorkout.workoutDate, "dateNewSneaks": previousWorkout.newSneaksDate]])
+        for workout in previousWorkouts {
+            guard let mile = workout.mileage else { print("error sending miles"); return }
+            guard let minute = workout.minute else { print("error sending minute"); return }
+            guard let calorie = workout.calorie else { print("error sending calorie"); return }
+            guard let date = workout.workoutDate else { print("error sending date"); return }
+            miles.append(mile)
+            minutes.append(minute)
+            calories.append(calorie)
+            dates.append(date)
+        }
+        ref.updateChildValues([workoutID: ["miles": miles, "dates": dates, "dateNewSneaks": dateToSave, "calories" : calories, "minutes": minutes]])
     }
     
     // MARK: - Retrieve workout data 
@@ -84,6 +98,7 @@ struct FirebaseMethods {
                     let previousWorkout = WorkoutData(mileage: miles, calorie: calories, workoutDate: dates, minute: minutes, newSneaksDate: dateNewSneaks)
                     previousWorkouts.append(previousWorkout)
                     if previousWorkouts.count == snapshotValue.count {
+                        print("PREVIOUS WORKOUTS: \(previousWorkouts.count)")
                         completion(previousWorkouts)
                     }
                 }
