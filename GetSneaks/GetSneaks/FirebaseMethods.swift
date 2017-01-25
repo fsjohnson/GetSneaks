@@ -24,7 +24,7 @@ struct FirebaseMethods {
         }
     }
     
-    static func signUpButton(email: String, password: String, name: String, username: String, completion: @escaping (Bool) -> () ) {
+    static func signUpButton(email: String, password: String, name: String, completion: @escaping (Bool) -> () ) {
         let ref = FIRDatabase.database().reference().root
         var boolToPass = false
         
