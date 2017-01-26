@@ -55,7 +55,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
     
     // HealthKit
     let healthKitStore: HKHealthStore = HKHealthStore()
-    let healthManager:HealthKitManager = HealthKitManager()
+    let healthKitManager:HealthKitManager = HealthKitManager()
     let locationManager = CLLocationManager()
     var milesTraveled = 0.0
     
@@ -92,6 +92,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
         }
         
         getHealthKitPermission()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,11 +191,39 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
         newWorkoutData.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -20).isActive = true
         newWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -15).isActive = true
         
+        // view health kit data
+        newWorkoutData.submitHealthKit.addTarget(self, action: #selector(viewHealthKitData), for: .touchUpInside)
+        
         // submitButtonAlert
         newWorkoutData.submitButton.addTarget(self, action: #selector(workoutAreYouSureAlert), for: .touchUpInside)
         
         // notTodaysDateButton
         newWorkoutData.notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
+    }
+    
+    func viewHealthKitData() {
+        newWorkoutData.configManualInput()
+        healthKitManager.getDistance(with: { (mostRecentDistance, error) in
+            print("ERROR: \(error)")
+            if error == nil {
+                
+                let distance = mostRecentDistance as? HKQuantitySample
+                if let miles = distance?.quantity.doubleValue(for: HKUnit.mile()) {
+                    guard let distanceDouble = Double(String(format: "%.3f", miles)) else { print("error retrieving distance double in authorizeHealthKit"); return }
+                    OperationQueue.main.addOperation {
+                        self.newWorkoutData.mileageTextField.text = String(distanceDouble.roundTo(places: 2))
+                    }
+                }
+                self.healthKitManager.getCalories(with: { (mostRecentCalories, error) in
+                    let energyBurned = mostRecentCalories as? HKQuantitySample
+                    if let unwrappedCalories = energyBurned?.quantity.doubleValue(for: HKUnit.calorie()) {
+                        OperationQueue.main.addOperation {
+                            self.newWorkoutData.caloriesTextField.text = String(unwrappedCalories)
+                        }
+                    }
+                })
+            }
+        })
     }
     
     func workoutAreYouSureAlert() {
@@ -219,6 +248,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
     func submitButtonSuccess() {
         let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
+            self.healthKitManager.saveHealthKitData()
             self.getSneaksTop.populateMilesCompleted()
             self.populateChartData()
             self.barChartConfig()
@@ -364,7 +394,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
     
     // Health kit 
     func getHealthKitPermission() {
-        healthManager.authorizeHealthKit { authorized, error in
+        healthKitManager.authorizeHealthKit { authorized, error in
             if authorized {
                 print("HEALTH: authorized")
             } else {
@@ -375,7 +405,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
             }
         }
     }
-
+    
     // Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "previousWorkouts" {

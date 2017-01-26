@@ -22,10 +22,14 @@ class NewWorkoutData: UIView {
     var submitButton = UIButton()
     var dateToSave = String()
     var notTodayButton = UIButton()
+    var containerView = UIView()
+    var submitHealthKit = UIButton()
+    var requestManual = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configLayout()
+        configHealthKitLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,9 +50,58 @@ class NewWorkoutData: UIView {
         submitInfoLabel.textColor = UIColor.themeLightBlue
         submitInfoLabel.textAlignment = .center
         
+        // Container view
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(containerView)
+        containerView.topAnchor.constraint(equalTo: submitInfoLabel.bottomAnchor, constant: 5).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        // Today's date config
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/DD/YY"
+        dateToSave = dateFormatter.string(from: date)
+    }
+    
+    func configHealthKitLayout() {
+        // Health kit view
+        submitHealthKit.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(submitHealthKit)
+        submitHealthKit.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
+        submitHealthKit.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        submitHealthKit.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        submitHealthKit.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        submitHealthKit.setTitle("Click here to submit your workout using Health Kit", for: .normal)
+        submitHealthKit.setTitleColor(UIColor.white, for: .normal)
+        submitHealthKit.titleLabel?.font = UIFont(name: "Optima-Bold", size: 15.0)
+        submitHealthKit.titleLabel?.textAlignment = .center
+        submitHealthKit.titleLabel?.numberOfLines = 0
+        
+        // Health kit view
+        requestManual.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(requestManual)
+        requestManual.topAnchor.constraint(equalTo: submitHealthKit.bottomAnchor, constant: 20).isActive = true
+        requestManual.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        requestManual.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        requestManual.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        requestManual.setTitle("Want to manually input your workout stats? Click here!", for: .normal)
+        requestManual.setTitleColor(UIColor.white, for: .normal)
+        requestManual.titleLabel?.font = UIFont(name: "Optima-Bold", size: 15.0)
+        requestManual.titleLabel?.textAlignment = .center
+        requestManual.titleLabel?.numberOfLines = 0
+        requestManual.addTarget(self, action: #selector(configManualInput), for: .touchUpInside)
+    }
+    
+    func configManualInput() {
+        // Remove health kit data 
+        submitHealthKit.removeFromSuperview()
+        requestManual.removeFromSuperview()
+        
         // Mileage stack view
         mileageLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(mileageLabel)
+        containerView.addSubview(mileageLabel)
         mileageLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         mileageLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         mileageLabel.font = UIFont(name: "Optima-Bold", size: 15.0)
@@ -57,7 +110,7 @@ class NewWorkoutData: UIView {
         mileageLabel.textAlignment = .center
         
         mileageTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(mileageTextField)
+        containerView.addSubview(mileageTextField)
         mileageTextField.heightAnchor.constraint(equalToConstant: 25).isActive = true
         mileageTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
         mileageTextField.font = UIFont(name: "Optima-Bold", size: 15.0)
@@ -76,15 +129,15 @@ class NewWorkoutData: UIView {
         mileageStackView.addArrangedSubview(mileageLabel)
         mileageStackView.addArrangedSubview(mileageTextField)
         mileageStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(mileageStackView)
+        containerView.addSubview(mileageStackView)
         mileageStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         mileageStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        mileageStackView.topAnchor.constraint(equalTo: submitInfoLabel.bottomAnchor, constant: 8).isActive = true
+        mileageStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
         mileageStackView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         // Calories stack view
         caloriesLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(caloriesLabel)
+        containerView.addSubview(caloriesLabel)
         caloriesLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         caloriesLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         caloriesLabel.font = UIFont(name: "Optima-Bold", size: 15.0)
@@ -93,7 +146,7 @@ class NewWorkoutData: UIView {
         caloriesLabel.textAlignment = .center
         
         caloriesTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(caloriesTextField)
+        containerView.addSubview(caloriesTextField)
         caloriesTextField.heightAnchor.constraint(equalToConstant: 25).isActive = true
         caloriesTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
         caloriesTextField.font = UIFont(name: "Optima-Bold", size: 15.0)
@@ -112,7 +165,7 @@ class NewWorkoutData: UIView {
         caloriesStackView.addArrangedSubview(caloriesLabel)
         caloriesStackView.addArrangedSubview(caloriesTextField)
         caloriesStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(caloriesStackView)
+        containerView.addSubview(caloriesStackView)
         caloriesStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         caloriesStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         caloriesStackView.topAnchor.constraint(equalTo: mileageStackView.bottomAnchor, constant: 8).isActive = true
@@ -120,7 +173,7 @@ class NewWorkoutData: UIView {
         
         // Minutes stack view
         minutesLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(minutesLabel)
+        containerView.addSubview(minutesLabel)
         minutesLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         minutesLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         minutesLabel.font = UIFont(name: "Optima-Bold", size: 15.0)
@@ -129,7 +182,7 @@ class NewWorkoutData: UIView {
         minutesLabel.textAlignment = .center
         
         minutesTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(minutesTextField)
+        containerView.addSubview(minutesTextField)
         minutesTextField.heightAnchor.constraint(equalToConstant: 25).isActive = true
         minutesTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
         minutesTextField.font = UIFont(name: "Optima-Bold", size: 15.0)
@@ -148,7 +201,7 @@ class NewWorkoutData: UIView {
         minutesStackView.addArrangedSubview(minutesLabel)
         minutesStackView.addArrangedSubview(minutesTextField)
         minutesStackView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(minutesStackView)
+        containerView.addSubview(minutesStackView)
         minutesStackView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         minutesStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         minutesStackView.topAnchor.constraint(equalTo: caloriesStackView.bottomAnchor, constant: 8).isActive = true
@@ -156,7 +209,7 @@ class NewWorkoutData: UIView {
         
         // Submit config
         submitButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(submitButton)
+        containerView.addSubview(submitButton)
         submitButton.topAnchor.constraint(equalTo: minutesStackView.bottomAnchor, constant: 8).isActive = true
         submitButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         submitButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -167,7 +220,7 @@ class NewWorkoutData: UIView {
         
         // Not today button config
         notTodayButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(notTodayButton)
+        containerView.addSubview(notTodayButton)
         notTodayButton.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 3).isActive = true
         notTodayButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         notTodayButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
@@ -175,12 +228,6 @@ class NewWorkoutData: UIView {
         notTodayButton.setTitle("Not today's date?", for: .normal)
         notTodayButton.setTitleColor(UIColor.themeLightGreen, for: .normal)
         notTodayButton.titleLabel?.font = UIFont(name: "Optima-BoldItalic", size: 12.0)
-        
-        // Today's date config 
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/DD/YY"
-        dateToSave = dateFormatter.string(from: date)
     }
     
     func saveToCoreData() {
