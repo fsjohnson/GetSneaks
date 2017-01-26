@@ -18,7 +18,6 @@ class LoginViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.themeMediumBlue
         loadViews()
-        
         hideKeyboardWhenTappedAround(isActive: true)
     }
     
@@ -38,7 +37,6 @@ class LoginViewController: UIViewController {
     }
     
     func animateSignupEntry(view: UIView) {
-        
         UIView.animate(withDuration: 0.25, animations: {
             view.center.y = self.view.center.y
         }) { (success) in
@@ -84,10 +82,7 @@ extension LoginViewController {
         }
     }
     
-    
-    
     func signupButtonAction(_ sender: UIButton) {
-        
         guard let email = loginView.emailTextField.text else {return}
         guard let password = loginView.passwordTextField.text else {return}
         guard let name = loginView.nameTextField.text else {return}
@@ -137,7 +132,7 @@ extension LoginViewController {
                         alertController.addAction(okAction)
                         self.present(alertController, animated: true, completion: nil)
                         
-                        // Success
+                    // Success
                     } else {
                         let alertController = UIAlertController(title: "Success", message: "Password reset e-mail sent", preferredStyle: .alert)
                         let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) in

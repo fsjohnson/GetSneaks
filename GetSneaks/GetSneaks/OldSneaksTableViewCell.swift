@@ -16,6 +16,7 @@ class OldSneaksTableViewCell: UITableViewCell {
     var totalCals = UILabel()
     var totalMinutes = UILabel()
     var stackView = UIStackView()
+    var noWorkoutData = NoWorkoutData()
     
     var workout: WorkoutData? {
         didSet {

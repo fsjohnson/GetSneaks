@@ -98,7 +98,9 @@ struct FirebaseMethods {
                     let previousWorkout = WorkoutData(mileage: miles, calorie: calories, workoutDate: dates, minute: minutes, newSneaksDate: dateNewSneaks)
                     previousWorkouts.append(previousWorkout)
                     if previousWorkouts.count == snapshotValue.count {
-                        print("PREVIOUS WORKOUTS: \(previousWorkouts.count)")
+                        previousWorkouts.sort(by: { (workoutOne, workoutTwo) -> Bool in
+                            workoutOne.newSneaksDate > workoutTwo.newSneaksDate
+                        })
                         completion(previousWorkouts)
                     }
                 }
