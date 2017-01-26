@@ -29,14 +29,14 @@ class Login: UIView {
         self.addSubview(logoImage)
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         logoImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
-        logoImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        logoImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        logoImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        logoImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
         logoImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         
         // email text field
         self.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 50).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 20).isActive = true
         emailTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
@@ -208,8 +208,10 @@ class Login: UIView {
     }
     
     lazy var logoImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 90, height: 90))
-        image.image = UIImage(named: "Sneaks")
+        let image = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 150, height: 90))
+        image.image = UIImage(named: "transparentSneaks")
+        image.layer.borderColor = UIColor.themeMediumBlue.cgColor
+        image.layer.borderWidth = 2.0
         return image
     }()
     

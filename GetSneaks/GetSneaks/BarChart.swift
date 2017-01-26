@@ -22,7 +22,7 @@ class BarChart: UIView {
     var miles = [String]()
     var legend = String()
     
-    var delegate: GetChartData! {
+    weak var delegate: GetChartData? {
         didSet {
             populateData()
             barChartSetup()
@@ -30,11 +30,16 @@ class BarChart: UIView {
     }
     
     func populateData() {
-        workoutDuration = delegate.workoutDuration
-        miles = delegate.miles
-        dates = delegate.dates
-        calories = delegate.calories
-        legend = delegate.legend
+        guard let unwrappedMinutes = delegate?.workoutDuration else { print("error retrieving delegate minutes"); return}
+        guard let unwrappedMiles = delegate?.miles else { print("error retrieving delegate miles"); return}
+        guard let unwrappedDates = delegate?.dates else { print("error retrieving delegate dates"); return}
+        guard let unwrappedCalories = delegate?.calories else { print("error retrieving delegate calories"); return}
+        guard let unwrappedLegend = delegate?.legend else { print("error retrieving delegate legend"); return}
+        workoutDuration = unwrappedMinutes
+        miles = unwrappedMiles
+        dates = unwrappedDates
+        calories = unwrappedCalories
+        legend = unwrappedLegend
     }
     
     func barChartSetup() {

@@ -162,16 +162,3 @@ extension LoginViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
-
-
-//MARK: -Animations
-extension LoginViewController {
-    
-    
-}
-
-
-//MARK: -Setup buttons
-extension LoginViewController {
-    
-}

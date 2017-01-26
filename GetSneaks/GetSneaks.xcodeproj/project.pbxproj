@@ -30,6 +30,8 @@
 		B56F1F831E3255B2006CB722 /* OldSneaksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */; };
 		B5910C531E30419000144F66 /* NoWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5910C521E30419000144F66 /* NoWorkoutData.swift */; };
 		B5B8FCF51E2D3065000D6F04 /* NewWorkoutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */; };
+		B5F8B1CC1E39339400CA8670 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F8B1CB1E39339400CA8670 /* HealthKit.framework */; };
+		B5F8B1D01E39516500CA8670 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8B1CF1E39516500CA8670 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,9 @@
 		B56F1F821E3255B2006CB722 /* OldSneaksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldSneaksTableViewCell.swift; sourceTree = "<group>"; };
 		B5910C521E30419000144F66 /* NoWorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoWorkoutData.swift; sourceTree = "<group>"; };
 		B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWorkoutData.swift; sourceTree = "<group>"; };
+		B5F8B1CA1E39339400CA8670 /* GetSneaks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetSneaks.entitlements; sourceTree = "<group>"; };
+		B5F8B1CB1E39339400CA8670 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		B5F8B1CF1E39516500CA8670 /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25FD7E3854CBFAD570A4BDD3 /* Pods_GetSneaks.framework in Frameworks */,
+				B5F8B1CC1E39339400CA8670 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +110,7 @@
 		B51EC0ED1E27FAF7004B0FBA /* GetSneaks */ = {
 			isa = PBXGroup;
 			children = (
+				B5F8B1CA1E39339400CA8670 /* GetSneaks.entitlements */,
 				B51EC1101E283E7B004B0FBA /* Models */,
 				B51EC10B1E27FC0A004B0FBA /* Controllers */,
 				B51EC10A1E27FC00004B0FBA /* Views */,
@@ -121,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				B50FA69F1E295662006D713A /* GetSneaksTop.swift */,
+				B5F8B1CF1E39516500CA8670 /* HealthKitManager.swift */,
 				B51EC1001E27FBD7004B0FBA /* BarChart.swift */,
 				B51BDCA01E38F74700984651 /* Login.swift */,
 				B5B8FCF41E2D3065000D6F04 /* NewWorkoutData.swift */,
@@ -166,6 +174,7 @@
 		B5B57BA601A4365B06877EF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B5F8B1CB1E39339400CA8670 /* HealthKit.framework */,
 				A93807EFFDE2A6C615273CC6 /* Pods_GetSneaks.framework */,
 			);
 			name = Frameworks;
@@ -208,6 +217,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = D647VK95AB;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -313,6 +327,7 @@
 				B51EC1011E27FBD7004B0FBA /* BarChart.swift in Sources */,
 				B51BDCA11E38F74700984651 /* Login.swift in Sources */,
 				B51EC0EF1E27FAF7004B0FBA /* AppDelegate.swift in Sources */,
+				B5F8B1D01E39516500CA8670 /* HealthKitManager.swift in Sources */,
 				B50FA6A01E295662006D713A /* GetSneaksTop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +450,7 @@
 			baseConfigurationReference = 776F9B141B3B19FE158E87A5 /* Pods-GetSneaks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GetSneaks/GetSneaks.entitlements;
 				DEVELOPMENT_TEAM = D647VK95AB;
 				INFOPLIST_FILE = GetSneaks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -449,6 +465,7 @@
 			baseConfigurationReference = 10476F8867EA4278E10C5AC5 /* Pods-GetSneaks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GetSneaks/GetSneaks.entitlements;
 				DEVELOPMENT_TEAM = D647VK95AB;
 				INFOPLIST_FILE = GetSneaks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

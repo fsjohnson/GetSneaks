@@ -11,8 +11,9 @@ import Charts
 import Foundation
 import CoreData
 import EventKit
+import HealthKit 
 
-protocol GetChartData {
+protocol GetChartData: class {
     func getChartData(with dataPoints: [String], values: [String], legend: String)
     var workoutDuration: [String] {get set}
     var calories: [String] {get set}
@@ -21,7 +22,7 @@ protocol GetChartData {
     var legend: String {get set}
 }
 
-class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate {
+class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate, CLLocationManagerDelegate {
     
     // Views
     var historyLabel = UILabel()
@@ -52,6 +53,12 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     // No data
     var noWorkoutData = NoWorkoutData()
     
+    // HealthKit
+    let healthKitStore: HKHealthStore = HKHealthStore()
+    let healthManager:HealthKitManager = HealthKitManager()
+    let locationManager = CLLocationManager()
+    var milesTraveled = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,6 +81,17 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         hideKeyboardWhenTappedAround(isActive: true)
+        
+        // Healthkit 
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        } else {
+            print("HEALTH: need to enable location")
+        }
+        
+        getHealthKitPermission()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -264,7 +282,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             }))
             self.present(alert, animated: true, completion: nil)
         }
-        
     }
     
     func savePreviousWorkoutAndDeleteCurrent() {
@@ -345,6 +362,20 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         barChart.delegate = self
     }
     
+    // Health kit 
+    func getHealthKitPermission() {
+        healthManager.authorizeHealthKit { authorized, error in
+            if authorized {
+                print("HEALTH: authorized")
+            } else {
+                if error != nil {
+                    print(error)
+                }
+                print("HEALTH: permission denied")
+            }
+        }
+    }
+
     // Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "previousWorkouts" {
