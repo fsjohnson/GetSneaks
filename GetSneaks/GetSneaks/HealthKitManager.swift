@@ -91,7 +91,7 @@ class HealthKitManager: UIView {
         self.healthKitStore.execute(sampleQuery)
     }
     
-    func getCalories(with completion: @escaping (HKSample?, Error?) -> Void) {
+    func getCalories(with completion: @escaping (Double?, Error?) -> Void) {
         guard let energyType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { print("error retrieving energy type"); return }
         let now = Date()
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
@@ -106,7 +106,9 @@ class HealthKitManager: UIView {
                 return
             }
             let mostRecentSample = results?.first as? HKQuantitySample
-            completion(mostRecentSample, nil)
+            let activeEnergy = mostRecentSample?.quantity.doubleValue(for: HKUnit.calorie())
+            print(activeEnergy)
+            completion(activeEnergy, nil)
         }
         self.healthKitStore.execute(sampleQuery)
     }

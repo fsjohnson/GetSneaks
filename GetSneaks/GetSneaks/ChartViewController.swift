@@ -87,6 +87,10 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         // Healthkit
         getHealthKitPermission()
         
+        FirebaseMethods.retrieveCurrentUserInfo { (user) in
+            print(user)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,10 +203,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.configManualInput()
         healthKitManager.getCalories { (recentCals, error) in
             OperationQueue.main.addOperation {
-                let totalCals = recentCals as? HKQuantitySample
-                if let cals = totalCals?.quantity.doubleValue(for: HKUnit.calorie()) {
-                    self.newWorkoutData.caloriesTextField.text = String(describing: cals)
-                }
+                guard let cals = recentCals else { print("error retrieving cals"); return }
+                self.newWorkoutData.caloriesTextField.text = String(describing: cals)
             }
         }
         
@@ -226,6 +228,12 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
                 }
             }
         })
+        
+        FirebaseMethods.retrieveCurrentUserInfo { (user) in
+            guard let age = user?.age else { return }
+            guard let gender = user?.gender else { return }
+            
+        }
     }
     
     func workoutAreYouSureAlert() {

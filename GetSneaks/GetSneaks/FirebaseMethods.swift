@@ -24,14 +24,14 @@ struct FirebaseMethods {
         }
     }
     
-    static func signUpButton(email: String, password: String, name: String, completion: @escaping (Bool) -> () ) {
+    static func signUpButton(email: String, password: String, name: String, age: String, gender: String, height: String, weight: String, completion: @escaping (Bool) -> () ) {
         let ref = FIRDatabase.database().reference().root
         var boolToPass = false
         
         if email != "" && password != "" {
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error == nil {
-                    let userDictionary = ["email": email, "name": name]
+                    let userDictionary = ["email": email, "name": name, "gender": gender, "age": age, "height": height, "weight": weight]
                     
                     ref.child("users").child((user?.uid)!).setValue(userDictionary)
                     boolToPass = true
@@ -104,6 +104,34 @@ struct FirebaseMethods {
                         completion(previousWorkouts)
                     }
                 }
+            }
+        })
+    }
+    
+    // MARK: - Retrieve user 
+    static func retrieveCurrentUserInfo(with completion: @escaping (User?) -> Void) {
+        guard let currentUser = FIRAuth.auth()?.currentUser?.uid else { return }
+        let ref = FIRDatabase.database().reference().child("users").child(currentUser)
+        
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChildren() {
+                print("no previous workout data")
+                completion(nil)
+            } else {
+                guard let snapshotValue = snapshot.value as? [String: Any] else { return }
+                guard
+                    let name = snapshotValue["name"] as? String,
+                    let gender = snapshotValue["gender"] as? String,
+                    let email = snapshotValue["email"] as? String,
+                    let age = snapshotValue["age"] as? String,
+                    let intAge = Int(age),
+                    let height = snapshotValue["height"] as? String,
+                    let intHeight = Int(height),
+                    let weight = snapshotValue["weight"] as? String,
+                    let intWeight = Int(weight)
+                    else { print("error retrieving current user info"); return }
+                let currentUser = User(name: name, email: email, gender: gender, age: intAge, height: intHeight, weight: intWeight)
+                completion(currentUser)
             }
         })
     }
