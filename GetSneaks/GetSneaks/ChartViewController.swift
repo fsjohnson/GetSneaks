@@ -11,7 +11,7 @@ import Charts
 import Foundation
 import CoreData
 import EventKit
-import HealthKit 
+import HealthKit
 
 protocol GetChartData: class {
     func getChartData(with dataPoints: [String], values: [String], legend: String)
@@ -22,7 +22,7 @@ protocol GetChartData: class {
     var legend: String {get set}
 }
 
-class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate, CLLocationManagerDelegate {
+class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate {
     
     // Views
     var historyLabel = UILabel()
@@ -38,6 +38,8 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
     var chartContainerView = UIView()
     let barChart = BarChart()
     let dateFormatter = DateFormatter()
+    let durationFormatter = DateComponentsFormatter()
+    let energyFormatter = EnergyFormatter()
     
     // Segmented controller
     var segmentedControl = UISegmentedControl(items: ["Miles", "Calories", "Minutes", "Old Sneaks"])
@@ -82,15 +84,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         hideKeyboardWhenTappedAround(isActive: true)
         
-        // Healthkit 
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        } else {
-            print("HEALTH: need to enable location")
-        }
-        
+        // Healthkit
         getHealthKitPermission()
         
     }
@@ -203,25 +197,33 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
     
     func viewHealthKitData() {
         newWorkoutData.configManualInput()
+        healthKitManager.getCalories { (recentCals, error) in
+            OperationQueue.main.addOperation {
+                let totalCals = recentCals as? HKQuantitySample
+                if let cals = totalCals?.quantity.doubleValue(for: HKUnit.calorie()) {
+                    self.newWorkoutData.caloriesTextField.text = String(describing: cals)
+                }
+            }
+        }
+        
         healthKitManager.getDistance(with: { (mostRecentDistance, error) in
             print("ERROR: \(error)")
             if error == nil {
-                
                 let distance = mostRecentDistance as? HKQuantitySample
+                guard let startDate = distance?.startDate else { print("error calc start date"); return }
+                guard let duration = distance?.endDate.timeIntervalSince(startDate) else { print("error calc duration");return }
+                let hours = Int(duration / 3600)
+                let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
+                let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
+                let timeString = String("\(hours):\(minutes):\(seconds)")
+                guard let unwrappedTimeLeft = timeString else { return }
                 if let miles = distance?.quantity.doubleValue(for: HKUnit.mile()) {
-                    guard let distanceDouble = Double(String(format: "%.3f", miles)) else { print("error retrieving distance double in authorizeHealthKit"); return }
                     OperationQueue.main.addOperation {
+                        guard let distanceDouble = Double(String(format: "%.3f", miles)) else { print("error retrieving distance double in authorizeHealthKit"); return }
                         self.newWorkoutData.mileageTextField.text = String(distanceDouble.roundTo(places: 2))
+                        self.newWorkoutData.minutesTextField.text = String(describing: unwrappedTimeLeft)
                     }
                 }
-                self.healthKitManager.getCalories(with: { (mostRecentCalories, error) in
-                    let energyBurned = mostRecentCalories as? HKQuantitySample
-                    if let unwrappedCalories = energyBurned?.quantity.doubleValue(for: HKUnit.calorie()) {
-                        OperationQueue.main.addOperation {
-                            self.newWorkoutData.caloriesTextField.text = String(unwrappedCalories)
-                        }
-                    }
-                })
             }
         })
     }
@@ -392,7 +394,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate,
         barChart.delegate = self
     }
     
-    // Health kit 
+    // Health kit
     func getHealthKitPermission() {
         healthKitManager.authorizeHealthKit { authorized, error in
             if authorized {

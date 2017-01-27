@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import HealthKit
+import CoreData
 
 class HealthKitManager: UIView {
     
@@ -16,6 +17,9 @@ class HealthKitManager: UIView {
     var distance = Double()
     var calories = Double()
     let date = Date()
+    var energyFormatter = EnergyFormatter()
+    var duration = Double()
+    let dateFormatter = DateFormatter()
     
     var startDate: Date? {
         get {
@@ -23,33 +27,19 @@ class HealthKitManager: UIView {
         }
     }
     
-    //    var durationInMinutes: Double {
-    //        get {
-    //            return durationTimeCell.doubleValue
-    //        }
-    //    }
-    
-    //    var energyBurned: Double? {
-    //        return caloriesCell.doubleValue
-    //
-    //    }
-    
     func datetimeWithDate(date: Date , time: Date) -> Date? {
-        
         let currentCalendar = NSCalendar.current
         let dateUnits: Set<Calendar.Component> = [.day, .month, .year]
         let timeUnits: Set<Calendar.Component> = [.hour, .minute]
         let dateComponents = Calendar.current.dateComponents(dateUnits, from: date)
         let hourComponents = Calendar.current.dateComponents(timeUnits, from: date)
-        
         let dateWithTime = Calendar.current.date(byAdding: hourComponents, to: currentCalendar.date(from: dateComponents)!)
-        
-        return dateWithTime;
+        return dateWithTime
     }
     
     func authorizeHealthKit(with completion: @escaping (Bool, Error?) -> Void) {
-        let readType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!, HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!, HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!]
-        let writeType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!, HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!, HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!]
+        let readType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!, HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!, HKObjectType.workoutType()]
+        let writeType: Set<HKSampleType> = [HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!, HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!, HKObjectType.workoutType()]
         
         
         healthKitStore.requestAuthorization(toShare: writeType, read: readType) { (success, error) in
@@ -57,23 +47,23 @@ class HealthKitManager: UIView {
                 self.getDistance(with: { (mostRecentDistance, error) in
                     print("ERROR: \(error)")
                     if error == nil {
-                        
                         let distance = mostRecentDistance as? HKQuantitySample
                         if let miles = distance?.quantity.doubleValue(for: HKUnit.mile()) {
                             guard let distanceDouble = Double(String(format: "%.3f", miles)) else { print("error retrieving distance double in authorizeHealthKit"); return }
                             self.distance = distanceDouble.roundTo(places: 2)
                             print("MILES: \(self.distance)")
                         }
-                        self.getCalories(with: { (mostRecentCalories, error) in
-                            let energyBurned = mostRecentCalories as? HKQuantitySample
-                            if let unwrappedCalories = energyBurned?.quantity.doubleValue(for: HKUnit.calorie()) {
-                                self.calories = unwrappedCalories
-                                print("CALORIES: \(self.calories)")
+                        self.getCalories(with: { (recentCals, error) in
+                            if error == nil {
+                                let totalCals = recentCals as? HKQuantitySample
+                                if let cals = totalCals?.quantity.doubleValue(for: HKUnit.calorie()) {
+                                    self.calories = cals
+                                    print("CALS: \(self.calories)")
+                                }
                             }
-                            
                         })
+                        completion(success, error)
                     }
-                    completion(success, error)
                 })
             }
         }
@@ -102,8 +92,7 @@ class HealthKitManager: UIView {
     }
     
     func getCalories(with completion: @escaping (HKSample?, Error?) -> Void) {
-        print("GET CALORIES CALLED")
-        guard let energyBurnedType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { print("error retrieving energy burned type"); return }
+        guard let energyType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) else { print("error retrieving energy type"); return }
         let now = Date()
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         let beginningOfDay = cal.startOfDay(for: now)
@@ -111,33 +100,52 @@ class HealthKitManager: UIView {
         let predicate = HKQuery.predicateForSamples(withStart: beginningOfDay, end: now, options: .strictStartDate)
         let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
-        let sampleQuery = HKSampleQuery(sampleType: energyBurnedType, predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+        let sampleQuery = HKSampleQuery(sampleType: energyType, predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, results, error) in
             if let queryError = error {
-                print("QUERY ERROR: \(queryError)")
                 completion(nil, queryError)
                 return
             }
             let mostRecentSample = results?.first as? HKQuantitySample
-            print("MOST RECENT SAMPLE: \(mostRecentSample)")
             completion(mostRecentSample, nil)
         }
         self.healthKitStore.execute(sampleQuery)
     }
-
-    func getWorkout(with completion: @escaping (HKSample?, Error?) -> Void) {
+    
+    func getExerciseTime(with completion: @escaping (HKSample?, Error?) -> Void) {
+        guard let exerciseType = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime) else { print("error retrieving exercise type"); return }
+        let now = Date()
+        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        let beginningOfDay = cal.startOfDay(for: now)
+        
+        let predicate = HKQuery.predicateForSamples(withStart: beginningOfDay, end: now, options: .strictStartDate)
+        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
+        
+        let sampleQuery = HKSampleQuery(sampleType: exerciseType, predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+            if let queryError = error {
+                completion(nil, queryError)
+                return
+            }
+            let mostRecentSample = results?.first as? HKQuantitySample
+            print("MOST RECENT EXERCISE: \(mostRecentSample)")
+            completion(mostRecentSample, nil)
+        }
+        self.healthKitStore.execute(sampleQuery)
+    }
+    
+    
+    func getWorkout(with completion: @escaping ([AnyObject]?, Error?) -> Void) {
         print("GET WORKOUT CALLED")
         let predicate = HKQuery.predicateForWorkouts(with: HKWorkoutActivityType.running)
         let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
         let sampleQuery = HKSampleQuery(sampleType: HKWorkoutType.workoutType(), predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+            print("RESULTS: \(results)")
             if let queryError = error {
                 print("QUERY ERROR: \(queryError)")
                 completion(nil, queryError)
                 return
             }
-            let mostRecentSample = results?.first as? HKQuantitySample
-            print("MOST RECENT SAMPLE: \(mostRecentSample)")
-            completion(mostRecentSample, nil)
+            completion(results, nil)
         }
         self.healthKitStore.execute(sampleQuery)
     }
@@ -162,6 +170,18 @@ class HealthKitManager: UIView {
         saveWorkout(startDate: startDate!, endDate: Date(), distance: distance, distanceUnit: HKUnit.mile(), calories: calories) { (success, error) in
             if success {
                 print("success")
+                let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
+                let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
+                
+                if let unwrappedEntity = entity {
+                    let newWorkout = Workout(context: managedContext)
+                    newWorkout.mileage = String(describing: self.distance)
+                    newWorkout.calorie = String(describing: self.calories)
+                    newWorkout.minute = String(describing: self.duration)
+                    newWorkout.workoutDate = self.dateFormatter.string(from: Date())
+                    DataModel.sharedInstance.saveContext()
+                }
+                
             } else {
                 print("ERROR: \(error)")
             }

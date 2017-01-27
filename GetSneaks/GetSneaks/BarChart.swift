@@ -90,6 +90,7 @@ class BarChart: UIView {
         barChartView.legend.enabled = false
         barChartView.rightAxis.enabled = false
         barChartView.leftAxis.drawGridLinesEnabled = false // true if want Y-Axis grid lines
+        barChartView.leftAxis.axisMinimum = 0.0
         barChartView.leftAxis.drawLabelsEnabled = true
         barChartView.data = chartData
         barChartView.backgroundColor = UIColor.themeMediumBlue
