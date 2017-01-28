@@ -415,16 +415,17 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         changeDate.changeDateLabel.text = "Input the time your workout started."
         self.datePickerView.datePickerMode = .time
         changeDate.changeDateTextField.inputView = self.datePickerView
-        self.datePickerView.addTarget(self, action: #selector(self.startTiePickerValueChanged), for: .valueChanged)
+        self.datePickerView.addTarget(self, action: #selector(self.startTimePickerValueChanged), for: .valueChanged)
         self.changeDate.submitButton.addTarget(self, action: #selector(submitButton), for: .touchUpInside)
         self.changeDate.cancelButton.addTarget(self, action: #selector(cancelButton), for: .touchUpInside)
         changeDate.layer.cornerRadius = 4.0
     }
     
-    func startTiePickerValueChanged(sender: UIDatePicker) {
+    func startTimePickerValueChanged(sender: UIDatePicker) {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         healthKitStartTime = sender.date
+        print("time: \(healthKitStartTime)")
         changeDate.changeDateTextField.text = dateFormatter.string(from: sender.date)
     }
     
@@ -453,7 +454,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     
     func viewHealthKitData() {
         newWorkoutData.configManualInput()
-        
         healthKitManager.getDistance(with: { (distance, error) in
             if error == nil {
                 guard let duration = distance?.endDate.timeIntervalSince(self.healthKitStartTime) else { print("error calc duration");return }
@@ -465,6 +465,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
                 let timeString = String("\(hours):\(minutes):\(seconds)")
                 guard let unwrappedTimeLeft = timeString else { return }
                 guard let miles: Double = distance?.sumQuantity()?.doubleValue(for: HKUnit.mile()).roundTo(places: 2) else { return }
+                print("health kit miles: \(miles)")
                 self.healthKitTotalDistance = miles
                 self.healthKitMinutes = duration
                 OperationQueue.main.addOperation {

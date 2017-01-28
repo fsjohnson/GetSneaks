@@ -71,9 +71,8 @@ class HealthKitManager: UIView {
     }
     
     func getDistance(with completion: @escaping (HKStatistics?, Error?) -> Void) {
-        print("GET DISTANCE CALLED")
         guard let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else { print("error retrieving distance type"); return }
-        let now = Date().addingTimeInterval(5 * -3600)
+        let now = Date()
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         let beginningOfDay = cal.startOfDay(for: now)
         
@@ -85,7 +84,7 @@ class HealthKitManager: UIView {
                 return
             }
             if let results = results {
-                print("MOST RECENT SAMPLE: \(results)")
+                print("result: \(results.sumQuantity()?.doubleValue(for: HKUnit.mile()))")
                 completion(results, error)
             }
         }
