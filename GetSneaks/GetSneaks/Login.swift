@@ -13,6 +13,7 @@ class Login: UIView {
     let borderWidth: CGFloat = 2
     let borderColor = UIColor.black.cgColor
     var signupButtonState = false
+    var constraintToRemove: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,11 +33,13 @@ class Login: UIView {
         logoImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         logoImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
         logoImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        logoImage.isHidden = false
         
         // email text field
         self.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 7).isActive = true
+        constraintToRemove?.isActive = false
         emailTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
@@ -112,17 +115,13 @@ class Login: UIView {
     
     fileprivate func setSignupPositions() {
         // logo image
-        self.addSubview(logoImage)
-        logoImage.translatesAutoresizingMaskIntoConstraints = false
-        logoImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
-        logoImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        logoImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        logoImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-
+        logoImage.isHidden = true
+        
         // email text field
         self.addSubview(emailTextField)
+        constraintToRemove = emailTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 50)
+        constraintToRemove?.isActive = true
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 10).isActive = true
         emailTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
