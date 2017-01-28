@@ -39,9 +39,9 @@ class OldSneaksTableViewCell: UITableViewCell {
         // top label config
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(topLabel)
-        topLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        topLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        topLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 0).isActive = true
         topLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 2).isActive = true
+        topLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         topLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         topLabel.font = UIFont(name: "Optima-Bold", size: 15.0)
         topLabel.textColor = UIColor.white

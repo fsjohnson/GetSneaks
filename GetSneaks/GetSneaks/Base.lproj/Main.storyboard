@@ -80,6 +80,11 @@
                                 <action selector="backButton:" destination="Szm-TP-BCs" id="9kf-sK-Ivc"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="ITI-iE-OVl">
+                            <connections>
+                                <action selector="logoutButton:" destination="Szm-TP-BCs" id="VF1-H4-WYp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66u-bf-qxd" userLabel="First Responder" sceneMemberID="firstResponder"/>

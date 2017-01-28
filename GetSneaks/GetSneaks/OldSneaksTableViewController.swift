@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class OldSneaksTableViewController: UITableViewController, GetChartData {
     
@@ -22,6 +23,7 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchPreviousWorkouts()
+        self.tableView.backgroundColor = UIColor.themeMediumBlue
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +37,7 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
                 self.configNoWorkoutData()
             } else {
                 FirebaseMethods.retrievePreviousWorkouts { (savedWorkoutData) in
-                    if self.view.subviews.contains(self.noWorkoutData) {
+                    if self.tableView.subviews.contains(self.noWorkoutData) {
                         self.noWorkoutData.removeFromSuperview()
                     }
                     self.workoutData = savedWorkoutData
@@ -56,13 +58,17 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
     
     // No workout data
     func configNoWorkoutData() {
-        self.view.addSubview(noWorkoutData)
+        self.tableView.addSubview(noWorkoutData)
         noWorkoutData.translatesAutoresizingMaskIntoConstraints = false
-        noWorkoutData.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        noWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        noWorkoutData.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        noWorkoutData.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        noWorkoutData.noDataLabel.text = "Every time you hit 400 mi in your sneaks your workout history in those sneaks will show up here!"
+        noWorkoutData.centerXAnchor.constraint(equalTo: self.tableView.centerXAnchor).isActive = true
+        noWorkoutData.centerYAnchor.constraint(equalTo: self.tableView.centerYAnchor).isActive = true
+        noWorkoutData.topAnchor.constraint(equalTo: self.tableView.topAnchor).isActive = true
+        noWorkoutData.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor).isActive = true
+        noWorkoutData.widthAnchor.constraint(equalTo: self.tableView.widthAnchor).isActive = true
+        noWorkoutData.noDataLabel.text = "Every time you hit 400 miles in your sneaks your workout history in those sneaks will show up here!"
+        noWorkoutData.noDataLabel.textAlignment = .center
+        noWorkoutData.noDataLabel.numberOfLines = 0
+        noWorkoutData.noDataLabel.lineBreakMode = .byWordWrapping
     }
     
     // MARK: - Table view data source
@@ -82,15 +88,29 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if workoutData.count == 1 {
-            return self.view.frame.height
-        } else {
-            return 300.0
-        }
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if workoutData.count == 1 {
+//            return self.view.frame.height
+//        } else {
+//            return 300.0
+//        }
+//    }
     
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func logoutButton(_ sender: Any) {
+        do {
+            try FIRAuth.auth()?.signOut()
+            
+        } catch {
+            print(error)
+        }
+        
+        if let storyboard = self.storyboard {
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.present(loginVC, animated: false, completion: nil)
+        }
     }
 }
