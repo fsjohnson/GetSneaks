@@ -191,14 +191,22 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         // view health kit data
         newWorkoutData.submitHealthKit.addTarget(self, action: #selector(viewHealthKitData), for: .touchUpInside)
         
-        // submitButtonAlert
-        newWorkoutData.submitButton.addTarget(self, action: #selector(workoutAreYouSureAlert), for: .touchUpInside)
-        
         // notTodaysDateButton
         newWorkoutData.notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
+        
+        // submit button config 
+        newWorkoutData.submitButton.addTarget(self, action: #selector(workoutAreYouSure), for: .touchUpInside)
+    }
+
+    func workoutAreYouSure() {
+        if newWorkoutData.selectAlert == 1 {
+            healthKitWorkoutAreYouSureAlert()
+        } else if newWorkoutData.selectAlert == 2 {
+            manualWorkoutAreYouSureAlert()
+        }
     }
     
-    func workoutAreYouSureAlert() {
+    func manualWorkoutAreYouSureAlert() {
         self.dismissKeyboard()
         if (newWorkoutData.caloriesTextField.text == "") || (newWorkoutData.mileageTextField.text == "") || (newWorkoutData.minutesTextField.text == "") {
             let alert = UIAlertController(title: "Oops!", message: "Please fill out all the fields", preferredStyle: .alert)
@@ -220,18 +228,19 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func submitButtonSuccess() {
         let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
-            print("miels: \(self.healthKitTotalDistance)")
-            print("cals: \(self.healthKitCalories)")
-            print("start: \(self.healthKitStartTime)")
-            print("end: \(self.healthKitEndDate)")
-            self.healthKitManager.saveHealthKitData(startDate: self.healthKitStartTime, endDate: self.healthKitEndDate, distance: self.healthKitTotalDistance, distanceUnit: HKUnit.mile(), calories: self.healthKitCalories)
             self.getSneaksTop.populateMilesCompleted()
             self.populateChartData()
+            self.getChartData(with: self.dates, values: self.miles, legend: "Miles")
             self.barChartConfig()
-            self.newWorkoutData.mileageTextField.text = ""
-            self.newWorkoutData.caloriesTextField.text = ""
-            self.newWorkoutData.minutesTextField.text = ""
             self.needNewSneaksAlert()
+            self.newWorkoutData.mileageStackView.removeFromSuperview()
+            self.newWorkoutData.caloriesStackView.removeFromSuperview()
+            self.newWorkoutData.minutesStackView.removeFromSuperview()
+            self.newWorkoutData.selectAlert = 1
+            self.newWorkoutData.submitButton.removeFromSuperview()
+            self.newWorkoutData.notTodayButton.removeFromSuperview()
+            self.configNewWorkoutDataView()
+            
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -421,6 +430,29 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         dateFormatter.timeStyle = .short
         healthKitStartTime = sender.date
         changeDate.changeDateTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    func healthKitWorkoutAreYouSureAlert() {
+        self.dismissKeyboard()
+        if (newWorkoutData.caloriesTextField.text == "") || (newWorkoutData.mileageTextField.text == "") || (newWorkoutData.minutesTextField.text == "") {
+            let alert = UIAlertController(title: "Oops!", message: "Please fill out all the fields", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Are you sure?", message: "Do you want to save this workout", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                print("miels: \(self.healthKitTotalDistance)")
+                print("cals: \(self.healthKitCalories)")
+                print("start: \(self.healthKitStartTime)")
+                print("end: \(self.healthKitEndDate)")
+                self.healthKitManager.saveHealthKitData(startDate: self.healthKitStartTime, endDate: self.healthKitEndDate, distance: self.healthKitTotalDistance, distanceUnit: HKUnit.mile(), calories: self.healthKitCalories)
+                self.submitButtonSuccess()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func viewHealthKitData() {

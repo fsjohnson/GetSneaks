@@ -25,6 +25,12 @@ class NewWorkoutData: UIView {
     var containerView = UIView()
     var submitHealthKit = UIButton()
     var requestManual = UIButton()
+    var selectAlert = Int()
+    var orLabel = UILabel()
+    let healthKitStackView = UIStackView()
+    let mileageStackView = UIStackView()
+    let caloriesStackView = UIStackView()
+    let minutesStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,35 +75,55 @@ class NewWorkoutData: UIView {
         // Health kit view
         submitHealthKit.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(submitHealthKit)
-        submitHealthKit.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
-        submitHealthKit.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         submitHealthKit.heightAnchor.constraint(equalToConstant: 40).isActive = true
         submitHealthKit.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        submitHealthKit.setTitle("Click here to submit your workout using Health Kit", for: .normal)
+        submitHealthKit.setTitle("Record workout using Health Kit", for: .normal)
         submitHealthKit.setTitleColor(UIColor.white, for: .normal)
         submitHealthKit.titleLabel?.font = UIFont(name: "Optima-Bold", size: 15.0)
         submitHealthKit.titleLabel?.textAlignment = .center
         submitHealthKit.titleLabel?.numberOfLines = 0
+        selectAlert = 1
+        
+        // Or label
+        orLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(orLabel)
+        orLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        orLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        orLabel.font = UIFont(name: "Optima-BoldItalic", size: 15.0)
+        orLabel.text = "Or"
+        orLabel.textColor = UIColor.white
+        orLabel.textAlignment = .center
         
         // Health kit view
         requestManual.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(requestManual)
-        requestManual.topAnchor.constraint(equalTo: submitHealthKit.bottomAnchor, constant: 20).isActive = true
-        requestManual.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         requestManual.heightAnchor.constraint(equalToConstant: 20).isActive = true
         requestManual.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        requestManual.setTitle("Want to manually input your workout stats? Click here!", for: .normal)
+        requestManual.setTitle("Manually input your workout stats", for: .normal)
         requestManual.setTitleColor(UIColor.white, for: .normal)
         requestManual.titleLabel?.font = UIFont(name: "Optima-Bold", size: 15.0)
         requestManual.titleLabel?.textAlignment = .center
         requestManual.titleLabel?.numberOfLines = 0
         requestManual.addTarget(self, action: #selector(configManualInput), for: .touchUpInside)
+        
+        // Health kit stack view
+        healthKitStackView.axis = UILayoutConstraintAxis.vertical
+        healthKitStackView.distribution  = UIStackViewDistribution.equalCentering
+        healthKitStackView.alignment = UIStackViewAlignment.center
+        healthKitStackView.addArrangedSubview(submitHealthKit)
+        healthKitStackView.addArrangedSubview(orLabel)
+        healthKitStackView.addArrangedSubview(requestManual)
+        healthKitStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(healthKitStackView)
+        healthKitStackView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+        healthKitStackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        healthKitStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12).isActive = true
+        healthKitStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -12).isActive = true
     }
     
     func configManualInput() {
-        // Remove health kit data 
-        submitHealthKit.removeFromSuperview()
-        requestManual.removeFromSuperview()
+        // Remove health kit data
+        healthKitStackView.removeFromSuperview()
         
         // Mileage stack view
         mileageLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -122,7 +148,6 @@ class NewWorkoutData: UIView {
         mileageTextField.layer.cornerRadius = 4.0
         mileageTextField.keyboardType = .numberPad
         
-        let mileageStackView = UIStackView()
         mileageStackView.axis = UILayoutConstraintAxis.horizontal
         mileageStackView.distribution  = UIStackViewDistribution.fillProportionally
         mileageStackView.alignment = UIStackViewAlignment.center
@@ -158,7 +183,6 @@ class NewWorkoutData: UIView {
         caloriesTextField.layer.cornerRadius = 4.0
         caloriesTextField.keyboardType = .numberPad
         
-        let caloriesStackView = UIStackView()
         caloriesStackView.axis = UILayoutConstraintAxis.horizontal
         caloriesStackView.distribution  = UIStackViewDistribution.fillProportionally
         caloriesStackView.alignment = UIStackViewAlignment.center
@@ -194,7 +218,6 @@ class NewWorkoutData: UIView {
         minutesTextField.layer.cornerRadius = 4.0
         minutesTextField.keyboardType = .numberPad
         
-        let minutesStackView = UIStackView()
         minutesStackView.axis = UILayoutConstraintAxis.horizontal
         minutesStackView.distribution  = UIStackViewDistribution.fillProportionally
         minutesStackView.alignment = UIStackViewAlignment.center
@@ -217,6 +240,7 @@ class NewWorkoutData: UIView {
         submitButton.setTitle("Submit", for: .normal)
         submitButton.setTitleColor(UIColor.white, for: .normal)
         submitButton.titleLabel?.font = UIFont(name: "Optima-Bold", size: 15.0)
+        selectAlert = 2
         
         // Not today button config
         notTodayButton.translatesAutoresizingMaskIntoConstraints = false
