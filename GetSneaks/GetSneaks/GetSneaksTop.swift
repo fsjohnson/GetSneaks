@@ -89,7 +89,6 @@ extension GetSneaksTop {
         for item in DataModel.sharedInstance.workouts {
             guard let mile = item.mileage else { print("error retrieving core data miles"); return nil}
             guard let doubleMile = Double(mile) else { print("error casting core data mile as double"); return nil}
-//            guard let intMile = Int(mile) else { print("problem casting core data mile as int"); return nil}
             totalMileage += doubleMile
         }
         milesCompletedIntLabel.text = "\(totalMileage) mi"

@@ -14,10 +14,10 @@ class User {
     var previousWorkoutData: [WorkoutData]?
     var gender: String
     var age: Int
-    var height: Int
-    var weight: Int
+    var height: Double
+    var weight: Double
     
-    init(name: String, email: String, gender: String, age: Int, height: Int, weight: Int) {
+    init(name: String, email: String, gender: String, age: Int, height: Double, weight: Double) {
         self.name = name
         self.email = email
         self.gender = gender

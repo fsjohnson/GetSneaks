@@ -77,6 +77,18 @@ struct FirebaseMethods {
     }
     
     // MARK: - Retrieve workout data 
+    static func checkIfPreviousWorkoutsIsEmpty(with completion: @escaping (Bool) -> Void) {
+        guard let currentUser = FIRAuth.auth()?.currentUser?.uid else { return }
+        let ref = FIRDatabase.database().reference().child("users").child(currentUser).child("previousWorkouts")
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.hasChildren() {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
+    
     static func retrievePreviousWorkouts(with completion: @escaping ([WorkoutData]) -> Void) {
         guard let currentUser = FIRAuth.auth()?.currentUser?.uid else { return }
         let ref = FIRDatabase.database().reference().child("users").child(currentUser).child("previousWorkouts")
@@ -126,13 +138,26 @@ struct FirebaseMethods {
                     let age = snapshotValue["age"] as? String,
                     let intAge = Int(age),
                     let height = snapshotValue["height"] as? String,
-                    let intHeight = Int(height),
                     let weight = snapshotValue["weight"] as? String,
-                    let intWeight = Int(weight)
+                    let doubleWeight = Double(weight)
                     else { print("error retrieving current user info"); return }
-                let currentUser = User(name: name, email: email, gender: gender, age: intAge, height: intHeight, weight: intWeight)
+                let doubleHeight = convertFtToIn(with: height)
+                guard let unwrappedDoubleHeight = doubleHeight else { print("error unwrapped int height"); return }
+                print("HEIGHT: \(unwrappedDoubleHeight)")
+                let currentUser = User(name: name, email: email, gender: gender, age: intAge, height: unwrappedDoubleHeight, weight: doubleWeight)
                 completion(currentUser)
             }
         })
+    }
+
+    static func convertFtToIn(with height: String) -> Double? {
+        var heightInInches = 0.0
+        let heightComponents = height.components(separatedBy: "\"")
+        guard let feet = heightComponents.first else { print("error calc feet"); return nil }
+        guard let inches = heightComponents.last else { print("error calc inch");return nil }
+        guard let doubleFeet = Double(feet) else { print("error casting feet as int"); return nil }
+        guard let doubleInches = Double(inches) else { print("error casting inches as int"); return nil }
+        heightInInches = (doubleFeet * 12) + doubleInches
+        return heightInInches
     }
 }

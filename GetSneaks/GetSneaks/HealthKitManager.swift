@@ -33,7 +33,8 @@ class HealthKitManager: UIView {
         let timeUnits: Set<Calendar.Component> = [.hour, .minute]
         let dateComponents = Calendar.current.dateComponents(dateUnits, from: date)
         let hourComponents = Calendar.current.dateComponents(timeUnits, from: date)
-        let dateWithTime = Calendar.current.date(byAdding: hourComponents, to: currentCalendar.date(from: dateComponents)!)
+        guard let components = currentCalendar.date(from: dateComponents) else { print("error calc date with time"); return nil }
+        let dateWithTime = Calendar.current.date(byAdding: hourComponents, to: components)
         return dateWithTime
     }
     
@@ -69,26 +70,26 @@ class HealthKitManager: UIView {
         }
     }
     
-    func getDistance(with completion: @escaping (HKSample?, Error?) -> Void) {
+    func getDistance(with completion: @escaping (HKStatistics?, Error?) -> Void) {
         print("GET DISTANCE CALLED")
         guard let distanceType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) else { print("error retrieving distance type"); return }
-        let now = Date()
+        let now = Date().addingTimeInterval(5 * -3600)
         let cal = Calendar(identifier: Calendar.Identifier.gregorian)
         let beginningOfDay = cal.startOfDay(for: now)
         
         let predicate = HKQuery.predicateForSamples(withStart: beginningOfDay, end: now, options: .strictStartDate)
-        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
         
-        let sampleQuery = HKSampleQuery(sampleType: distanceType, predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor]) { (query, results, error) in
+        let query = HKStatisticsQuery(quantityType: distanceType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (query: HKStatisticsQuery, results: HKStatistics?, error: Error?) in
             if let queryError = error {
                 completion(nil, queryError)
                 return
             }
-            let mostRecentSample = results?.first as? HKQuantitySample
-            print("MOST RECENT SAMPLE: \(mostRecentSample)")
-            completion(mostRecentSample, nil)
+            if let results = results {
+                print("MOST RECENT SAMPLE: \(results)")
+                completion(results, error)
+            }
         }
-        self.healthKitStore.execute(sampleQuery)
+        self.healthKitStore.execute(query)
     }
     
     func getCalories(with completion: @escaping (Double?, Error?) -> Void) {
@@ -162,14 +163,25 @@ class HealthKitManager: UIView {
                 completion(success, error)
             } else {
                 print("Succes: workout saved: \(workout)")
+                let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
+                let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
+                
+                if let unwrappedEntity = entity {
+                    let newWorkout = Workout(context: managedContext)
+                    newWorkout.mileage = String(describing: self.distance)
+                    newWorkout.calorie = String(describing: self.calories)
+                    newWorkout.minute = String(describing: self.duration)
+                    newWorkout.workoutDate = self.dateFormatter.string(from: Date())
+                    DataModel.sharedInstance.saveContext()
+                }
                 completion(success, nil)
             }
         })
     }
     
-    func saveHealthKitData() {
+    func saveHealthKitData(startDate: Date, endDate: Date, distance: Double, distanceUnit: HKUnit, calories: Double) {
         print("SAVE DATA")
-        saveWorkout(startDate: startDate!, endDate: Date(), distance: distance, distanceUnit: HKUnit.mile(), calories: calories) { (success, error) in
+        saveWorkout(startDate: startDate, endDate: Date(), distance: distance, distanceUnit: HKUnit.mile(), calories: calories) { (success, error) in
             if success {
                 print("success")
                 let managedContext = DataModel.sharedInstance.persistentContainer.viewContext

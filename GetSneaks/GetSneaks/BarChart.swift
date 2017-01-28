@@ -54,7 +54,6 @@ class BarChart: UIView {
         
         // Bar chart animation
         barChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInBounce)
-        
         setBarChart(dataPoints: dates, values: workoutDuration, legend: legend)
     }
     
@@ -68,7 +67,9 @@ class BarChart: UIView {
         
         // Data point setup & color config
         for i in 0..<dataPoints.count {
-            let dataPoint = BarChartDataEntry(x: Double(i), y: Double(values[i])!)
+            print("DATA: \(Double(i)), \(Double(values[i]))")
+            guard let values = Double(values[i]) else { print("error retrieving bar chart values"); return }
+            let dataPoint = BarChartDataEntry(x: Double(i), y: values)
             dataEntry.append(dataPoint)
         }
         

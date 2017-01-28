@@ -30,15 +30,17 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
     
     // Fetch data
     func fetchPreviousWorkouts() {
-        FirebaseMethods.retrievePreviousWorkouts { (savedWorkoutData) in
-            if savedWorkoutData.count == 0 {
-//                self.configNoWorkoutData()
+        FirebaseMethods.checkIfPreviousWorkoutsIsEmpty { (isEmpty) in
+            if isEmpty == true {
+                self.configNoWorkoutData()
             } else {
-//                if self.view.subviews.contains(self.noWorkoutData) {
-//                    self.noWorkoutData.removeFromSuperview()
-//                }
-                self.workoutData = savedWorkoutData
-                self.tableView.reloadData()
+                FirebaseMethods.retrievePreviousWorkouts { (savedWorkoutData) in
+                    if self.view.subviews.contains(self.noWorkoutData) {
+                        self.noWorkoutData.removeFromSuperview()
+                    }
+                    self.workoutData = savedWorkoutData
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -52,14 +54,14 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
         self.legend = legend
     }
     
-    // No workout data 
+    // No workout data
     func configNoWorkoutData() {
-        self.tableView?.addSubview(noWorkoutData)
+        self.view.addSubview(noWorkoutData)
         noWorkoutData.translatesAutoresizingMaskIntoConstraints = false
-        noWorkoutData.topAnchor.constraint(equalTo: self.tableView.topAnchor).isActive = true
-        noWorkoutData.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor).isActive = true
-        noWorkoutData.leadingAnchor.constraint(equalTo: self.tableView.leadingAnchor).isActive = true
-        noWorkoutData.trailingAnchor.constraint(equalTo: self.tableView.trailingAnchor).isActive = true
+        noWorkoutData.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        noWorkoutData.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        noWorkoutData.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        noWorkoutData.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         noWorkoutData.noDataLabel.text = "Every time you hit 400 mi in your sneaks your workout history in those sneaks will show up here!"
     }
     
@@ -76,7 +78,7 @@ class OldSneaksTableViewController: UITableViewController, GetChartData {
         cell.barChart.barChartView.legend.enabled = true
         cell.barChart.barChartView.legend.font = UIFont(name: "Optima-Bold", size: 11)!
         cell.barChart.barChartView.legend.textColor = UIColor.white
-        cell.isUserInteractionEnabled = false 
+        cell.isUserInteractionEnabled = false
         return cell
     }
     

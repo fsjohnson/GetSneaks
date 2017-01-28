@@ -58,8 +58,11 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     // HealthKit
     let healthKitStore: HKHealthStore = HKHealthStore()
     let healthKitManager:HealthKitManager = HealthKitManager()
-    let locationManager = CLLocationManager()
-    var milesTraveled = 0.0
+    var healthKitStartTime: Date = Date()
+    var healthKitEndDate: Date = Date()
+    var healthKitTotalDistance = 0.0
+    var healthKitCalories = 0.0
+    var healthKitMinutes = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,11 +89,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         
         // Healthkit
         getHealthKitPermission()
-        
-        FirebaseMethods.retrieveCurrentUserInfo { (user) in
-            print(user)
-        }
-        
+        healthKitTimeStarted()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -199,43 +198,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.notTodayButton.addTarget(self, action: #selector(notTodaysDate), for: .touchUpInside)
     }
     
-    func viewHealthKitData() {
-        newWorkoutData.configManualInput()
-        healthKitManager.getCalories { (recentCals, error) in
-            OperationQueue.main.addOperation {
-                guard let cals = recentCals else { print("error retrieving cals"); return }
-                self.newWorkoutData.caloriesTextField.text = String(describing: cals)
-            }
-        }
-        
-        healthKitManager.getDistance(with: { (mostRecentDistance, error) in
-            print("ERROR: \(error)")
-            if error == nil {
-                let distance = mostRecentDistance as? HKQuantitySample
-                guard let startDate = distance?.startDate else { print("error calc start date"); return }
-                guard let duration = distance?.endDate.timeIntervalSince(startDate) else { print("error calc duration");return }
-                let hours = Int(duration / 3600)
-                let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
-                let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
-                let timeString = String("\(hours):\(minutes):\(seconds)")
-                guard let unwrappedTimeLeft = timeString else { return }
-                if let miles = distance?.quantity.doubleValue(for: HKUnit.mile()) {
-                    OperationQueue.main.addOperation {
-                        guard let distanceDouble = Double(String(format: "%.3f", miles)) else { print("error retrieving distance double in authorizeHealthKit"); return }
-                        self.newWorkoutData.mileageTextField.text = String(distanceDouble.roundTo(places: 2))
-                        self.newWorkoutData.minutesTextField.text = String(describing: unwrappedTimeLeft)
-                    }
-                }
-            }
-        })
-        
-        FirebaseMethods.retrieveCurrentUserInfo { (user) in
-            guard let age = user?.age else { return }
-            guard let gender = user?.gender else { return }
-            
-        }
-    }
-    
     func workoutAreYouSureAlert() {
         self.dismissKeyboard()
         if (newWorkoutData.caloriesTextField.text == "") || (newWorkoutData.mileageTextField.text == "") || (newWorkoutData.minutesTextField.text == "") {
@@ -258,7 +220,11 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func submitButtonSuccess() {
         let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
-            self.healthKitManager.saveHealthKitData()
+            print("miels: \(self.healthKitTotalDistance)")
+            print("cals: \(self.healthKitCalories)")
+            print("start: \(self.healthKitStartTime)")
+            print("end: \(self.healthKitEndDate)")
+            self.healthKitManager.saveHealthKitData(startDate: self.healthKitStartTime, endDate: self.healthKitEndDate, distance: self.healthKitTotalDistance, distanceUnit: HKUnit.mile(), calories: self.healthKitCalories)
             self.getSneaksTop.populateMilesCompleted()
             self.populateChartData()
             self.barChartConfig()
@@ -367,8 +333,11 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         workouts = DataModel.sharedInstance.workouts
         
         workouts.sort { (workoutOne, workoutTwo) -> Bool in
-            workoutOne.workoutDate! < workoutTwo.workoutDate!
+            guard let workoutOneDate = workoutOne.workoutDate else { print("core data workoutOne error"); return false }
+            guard let workoutTwoDate = workoutTwo.workoutDate else { print("core data workoutTwo error"); return false }
+            return workoutOneDate < workoutTwoDate
         }
+        
         for workout in workouts {
             guard let mile = workout.mileage else { print("core data mile error"); return }
             guard let calorie = workout.calorie else { print("core data calories error");return }
@@ -379,6 +348,10 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             dates.append(date)
             miles.append(mile)
         }
+        print("miles: \(miles)")
+        print("dates: \(dates)")
+        print("calories: \(calories)")
+        print("minutes: \(workoutDuration)")
     }
     
     // No data config
@@ -412,6 +385,74 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
                     print(error)
                 }
                 print("HEALTH: permission denied")
+            }
+        }
+    }
+    
+    func healthKitTimeStarted() {
+        // background View
+        self.view.addSubview(backgroundView)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        
+        // Change date view
+        changeDate = ChangeDate()
+        self.view.addSubview(changeDate)
+        changeDate.translatesAutoresizingMaskIntoConstraints = false
+        changeDate.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        changeDate.widthAnchor.constraint(equalTo: chartContainerView.widthAnchor, constant: -20).isActive = true
+        changeDate.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        changeDate.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        changeDate.changeDateLabel.text = "Input the time your workout started."
+        self.datePickerView.datePickerMode = .time
+        changeDate.changeDateTextField.inputView = self.datePickerView
+        self.datePickerView.addTarget(self, action: #selector(self.startTiePickerValueChanged), for: .valueChanged)
+        self.changeDate.submitButton.addTarget(self, action: #selector(submitButton), for: .touchUpInside)
+        self.changeDate.cancelButton.addTarget(self, action: #selector(cancelButton), for: .touchUpInside)
+        changeDate.layer.cornerRadius = 4.0
+    }
+    
+    func startTiePickerValueChanged(sender: UIDatePicker) {
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        healthKitStartTime = sender.date
+        changeDate.changeDateTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    func viewHealthKitData() {
+        newWorkoutData.configManualInput()
+        
+        healthKitManager.getDistance(with: { (distance, error) in
+            print("Distance: \(distance?.sumQuantity()?.doubleValue(for: HKUnit.mile()))")
+            if error == nil {
+                guard let duration = distance?.endDate.timeIntervalSince(self.healthKitStartTime) else { print("error calc duration");return }
+                guard let endDate = distance?.endDate else { return }
+                self.healthKitEndDate = endDate
+                let hours = Int(duration / 3600)
+                let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
+                let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
+                let timeString = String("\(hours):\(minutes):\(seconds)")
+                guard let unwrappedTimeLeft = timeString else { return }
+                guard let miles: Double = distance?.sumQuantity()?.doubleValue(for: HKUnit.mile()).roundTo(places: 2) else { return }
+                self.healthKitTotalDistance = miles
+                self.healthKitMinutes = duration
+                OperationQueue.main.addOperation {
+                    self.newWorkoutData.mileageTextField.text = String(describing: miles)
+                    self.newWorkoutData.minutesTextField.text = String(describing: unwrappedTimeLeft)
+                }
+            }
+        })
+        
+        FirebaseMethods.retrieveCurrentUserInfo { (user) in
+            OperationQueue.main.addOperation {
+                guard let weight = user?.weight else { return }
+                let cals: Double = weight * self.healthKitTotalDistance * 0.75
+                self.healthKitCalories = cals
+                self.newWorkoutData.caloriesTextField.text = String(describing: cals.roundTo(places: 2))
             }
         }
     }
