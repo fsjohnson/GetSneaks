@@ -58,37 +58,10 @@ class Login: UIView {
         nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         nameTextField.transform = CGAffineTransform.init(scaleX: 0.0, y: 1)
         
-        // age text field
-        self.addSubview(ageTextField)
-        ageTextField.translatesAutoresizingMaskIntoConstraints = false
-        ageTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
-        ageTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        ageTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        ageTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        ageTextField.transform = CGAffineTransform.init(scaleX: 0.0, y: 1)
-        
-        // gender text field
-        self.addSubview(genderTextField)
-        genderTextField.translatesAutoresizingMaskIntoConstraints = false
-        genderTextField.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 10).isActive = true
-        genderTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        genderTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        genderTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        genderTextField.transform = CGAffineTransform.init(scaleX: 0.0, y: 1)
-        
-        // height text field
-        self.addSubview(heightTextField)
-        heightTextField.translatesAutoresizingMaskIntoConstraints = false
-        heightTextField.topAnchor.constraint(equalTo: genderTextField.bottomAnchor, constant: 10).isActive = true
-        heightTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        heightTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        heightTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        heightTextField.transform = CGAffineTransform.init(scaleX: 0.0, y: 1)
-        
         // weight text field
         self.addSubview(weightTextField)
         weightTextField.translatesAutoresizingMaskIntoConstraints = false
-        weightTextField.topAnchor.constraint(equalTo: heightTextField.bottomAnchor, constant: 10).isActive = true
+        weightTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
         weightTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
         weightTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         weightTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
@@ -137,6 +110,92 @@ class Login: UIView {
         cancelButton.isHidden = true
     }
     
+    fileprivate func setSignupPositions() {
+        // logo image
+        self.addSubview(logoImage)
+        logoImage.translatesAutoresizingMaskIntoConstraints = false
+        logoImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        logoImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        logoImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        logoImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+
+        // email text field
+        self.addSubview(emailTextField)
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 10).isActive = true
+        emailTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
+        // password text field
+        self.addSubview(passwordTextField)
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10).isActive = true
+        passwordTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        passwordTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
+        // name text field
+        self.addSubview(nameTextField)
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        nameTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
+        nameTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        nameTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        nameTextField.transform = CGAffineTransform.init(scaleX: 0.0, y: 1)
+        
+        // weight text field
+        self.addSubview(weightTextField)
+        weightTextField.translatesAutoresizingMaskIntoConstraints = false
+        weightTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
+        weightTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        weightTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        weightTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        weightTextField.transform = CGAffineTransform.init(scaleX: 0.0, y: 1)
+        
+        // login button
+        self.addSubview(loginButton)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        loginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
+        // forgot password text field
+        self.addSubview(forgotPasswordButton)
+        forgotPasswordButton.translatesAutoresizingMaskIntoConstraints = false
+        forgotPasswordButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10).isActive = true
+        forgotPasswordButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        forgotPasswordButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        forgotPasswordButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
+        // sign up button
+        self.addSubview(signupButton)
+        signupButton.translatesAutoresizingMaskIntoConstraints = false
+        signupButton.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 10).isActive = true
+        signupButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        signupButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        signupButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        signupButton.isHidden = false
+        
+        // new user button
+        self.addSubview(newuserButton)
+        newuserButton.translatesAutoresizingMaskIntoConstraints = false
+        newuserButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        newuserButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        newuserButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        newuserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        
+        // cancel button
+        self.addSubview(cancelButton)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.topAnchor.constraint(equalTo: signupButton.bottomAnchor, constant: 5).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        cancelButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        cancelButton.isHidden = false
+    }
+    
     func newuserButtonAction(_ sender: UIButton) {
         animateForSignup()
     }
@@ -146,11 +205,7 @@ class Login: UIView {
     }
     
     fileprivate func animateForSignup() {
-        logoImage.isHidden = true
         nameTextField.isHidden = false
-        ageTextField.isHidden = false
-        genderTextField.isHidden = false
-        heightTextField.isHidden = false
         weightTextField.isHidden = false
         signupButton.isHidden = false
         cancelButton.isHidden = false
@@ -158,24 +213,14 @@ class Login: UIView {
         newuserButton.isUserInteractionEnabled = false
         self.cancelButton.isUserInteractionEnabled = false
         
-        // email text field
-        self.addSubview(emailTextField)
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
-        emailTextField.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        
         UIView.animateKeyframes(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .calculationModeCubic], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
+                self.setSignupPositions()
             })
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.33, animations: {
                 self.emailTextField.transform = CGAffineTransform.init(scaleX: 1.1, y: 1)
                 self.passwordTextField.transform = CGAffineTransform.init(scaleX: 1.1, y: 1)
                 self.nameTextField.transform = CGAffineTransform.init(scaleX: 1.2, y: 1)
-                self.ageTextField.transform = CGAffineTransform.init(scaleX: 1.2, y: 1)
-                self.genderTextField.transform = CGAffineTransform.init(scaleX: 1.2, y: 1)
-                self.heightTextField.transform = CGAffineTransform.init(scaleX: 1.2, y: 1)
                 self.weightTextField.transform = CGAffineTransform.init(scaleX: 1.2, y: 1)
                 
                 self.loginButton.transform = CGAffineTransform.init(scaleX: 1.1, y: 1)
@@ -187,9 +232,6 @@ class Login: UIView {
                 self.emailTextField.transform = CGAffineTransform.init(scaleX: 0.9, y: 1)
                 self.passwordTextField.transform = CGAffineTransform.init(scaleX: 0.9, y: 1)
                 self.nameTextField.transform = CGAffineTransform.init(scaleX: 0.8, y: 1)
-                self.ageTextField.transform = CGAffineTransform.init(scaleX: 0.8, y: 1)
-                self.genderTextField.transform = CGAffineTransform.init(scaleX: 0.8, y: 1)
-                self.heightTextField.transform = CGAffineTransform.init(scaleX: 0.8, y: 1)
                 self.weightTextField.transform = CGAffineTransform.init(scaleX: 0.8, y: 1)
                 
                 self.loginButton.transform = CGAffineTransform.init(scaleX: 0.9, y: 1)
@@ -201,9 +243,6 @@ class Login: UIView {
                 self.emailTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 self.passwordTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 self.nameTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
-                self.ageTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
-                self.genderTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
-                self.heightTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 self.weightTextField.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 
                 self.loginButton.transform = CGAffineTransform.init(scaleX: 1, y: 1)
@@ -225,10 +264,10 @@ class Login: UIView {
         self.newuserButton.isUserInteractionEnabled = false
         self.cancelButton.isUserInteractionEnabled = false
         self.forgotPasswordButton.isHidden = false
+        
         UIView.animateKeyframes(withDuration: 0.2, delay: 0.0, options: [.allowUserInteraction, .calculationModeCubic], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
                 self.setLoginPositions()
-                
             })
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.33, animations: {
                 self.emailTextField.transform = CGAffineTransform.init(scaleX: 0.9, y: 1)
@@ -262,9 +301,6 @@ class Login: UIView {
             })
         }) { (success) in
             self.nameTextField.isHidden = true
-            self.ageTextField.isHidden = true
-            self.genderTextField.isHidden = true
-            self.heightTextField.isHidden = true
             self.weightTextField.isHidden = true
             self.signupButton.isHidden = true
             self.cancelButton.isHidden = true
@@ -274,7 +310,7 @@ class Login: UIView {
     }
     
     lazy var logoImage: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 150, height: 90))
+        let image = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 200, height: 200))
         image.image = UIImage(named: "transparentSneaks")
         image.layer.borderColor = UIColor.themeMediumBlue.cgColor
         image.layer.borderWidth = 2.0
@@ -316,39 +352,6 @@ class Login: UIView {
         textField.backgroundColor = UIColor.white
         textField.font = UIFont(name: "Optima-Bold", size: 12)
         textField.attributedPlaceholder = NSAttributedString(string: " Enter name")
-        return textField
-    }()
-    
-    lazy var ageTextField: CustomTextField = {
-        let textField = CustomTextField()
-        textField.layer.borderWidth = self.borderWidth
-        textField.layer.borderColor = self.borderColor
-        textField.autocorrectionType = .no
-        textField.backgroundColor = UIColor.white
-        textField.font = UIFont(name: "Optima-Bold", size: 12)
-        textField.attributedPlaceholder = NSAttributedString(string: " Enter age")
-        return textField
-    }()
-    
-    lazy var genderTextField: CustomTextField = {
-        let textField = CustomTextField()
-        textField.layer.borderWidth = self.borderWidth
-        textField.layer.borderColor = self.borderColor
-        textField.autocorrectionType = .no
-        textField.backgroundColor = UIColor.white
-        textField.font = UIFont(name: "Optima-Bold", size: 12)
-        textField.attributedPlaceholder = NSAttributedString(string: " Enter M/F")
-        return textField
-    }()
-    
-    lazy var heightTextField: CustomTextField = {
-        let textField = CustomTextField()
-        textField.layer.borderWidth = self.borderWidth
-        textField.layer.borderColor = self.borderColor
-        textField.autocorrectionType = .no
-        textField.backgroundColor = UIColor.white
-        textField.font = UIFont(name: "Optima-Bold", size: 12)
-        textField.attributedPlaceholder = NSAttributedString(string: " Enter height in inches")
         return textField
     }()
     

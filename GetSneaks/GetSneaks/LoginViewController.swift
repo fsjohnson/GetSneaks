@@ -86,18 +86,15 @@ extension LoginViewController {
         guard let email = loginView.emailTextField.text else {return}
         guard let password = loginView.passwordTextField.text else {return}
         guard let name = loginView.nameTextField.text else {return}
-        guard let age = loginView.ageTextField.text else {return}
-        guard let gender = loginView.genderTextField.text else {return}
-        guard let height = loginView.heightTextField.text else {return}
         guard let weight = loginView.weightTextField.text else {return}
         
-        if email != "" && password != "" && name != "" && age != "" && gender != "" && height != "" && weight != "" {
+        if email != "" && password != "" && name != "" && weight != "" {
             if password.characters.count < 6 {
                 let alert = self.createAlertWith(title: "Couldn't Signup", message: "Password must be at least 6 characters.")
                 self.present(alert, animated: true, completion: {
                 })
             } else {
-                FirebaseMethods.signUpButton(email: email, password: password, name: name, age: age, gender: gender, height: height, weight: weight) { success in
+                FirebaseMethods.signUpButton(email: email, password: password, name: name, weight: weight) { success in
                     if success {
                         self.performSegue(withIdentifier: "landingSegue", sender: self)
                     } else {

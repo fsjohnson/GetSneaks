@@ -357,10 +357,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             dates.append(date)
             miles.append(mile)
         }
-        print("miles: \(miles)")
-        print("dates: \(dates)")
-        print("calories: \(calories)")
-        print("minutes: \(workoutDuration)")
     }
     
     // No data config
@@ -459,7 +455,6 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
         newWorkoutData.configManualInput()
         
         healthKitManager.getDistance(with: { (distance, error) in
-            print("Distance: \(distance?.sumQuantity()?.doubleValue(for: HKUnit.mile()))")
             if error == nil {
                 guard let duration = distance?.endDate.timeIntervalSince(self.healthKitStartTime) else { print("error calc duration");return }
                 guard let endDate = distance?.endDate else { return }

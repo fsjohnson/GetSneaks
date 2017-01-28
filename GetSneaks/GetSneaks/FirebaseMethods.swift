@@ -24,14 +24,14 @@ struct FirebaseMethods {
         }
     }
     
-    static func signUpButton(email: String, password: String, name: String, age: String, gender: String, height: String, weight: String, completion: @escaping (Bool) -> () ) {
+    static func signUpButton(email: String, password: String, name: String, weight: String, completion: @escaping (Bool) -> () ) {
         let ref = FIRDatabase.database().reference().root
         var boolToPass = false
         
         if email != "" && password != "" {
             FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                 if error == nil {
-                    let userDictionary = ["email": email, "name": name, "gender": gender, "age": age, "height": height, "weight": weight]
+                    let userDictionary = ["email": email, "name": name, "weight": weight]
                     
                     ref.child("users").child((user?.uid)!).setValue(userDictionary)
                     boolToPass = true
@@ -133,18 +133,11 @@ struct FirebaseMethods {
                 guard let snapshotValue = snapshot.value as? [String: Any] else { return }
                 guard
                     let name = snapshotValue["name"] as? String,
-                    let gender = snapshotValue["gender"] as? String,
                     let email = snapshotValue["email"] as? String,
-                    let age = snapshotValue["age"] as? String,
-                    let intAge = Int(age),
-                    let height = snapshotValue["height"] as? String,
                     let weight = snapshotValue["weight"] as? String,
                     let doubleWeight = Double(weight)
                     else { print("error retrieving current user info"); return }
-                let doubleHeight = convertFtToIn(with: height)
-                guard let unwrappedDoubleHeight = doubleHeight else { print("error unwrapped int height"); return }
-                print("HEIGHT: \(unwrappedDoubleHeight)")
-                let currentUser = User(name: name, email: email, gender: gender, age: intAge, height: unwrappedDoubleHeight, weight: doubleWeight)
+                let currentUser = User(name: name, email: email, weight: doubleWeight)
                 completion(currentUser)
             }
         })
