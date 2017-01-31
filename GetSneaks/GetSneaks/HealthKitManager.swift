@@ -152,10 +152,10 @@ class HealthKitManager: UIView {
         self.healthKitStore.execute(sampleQuery)
     }
     
-    func saveWorkout(startDate: Date, endDate: Date, distance: Double, distanceUnit: HKUnit, calories: Double, completion: @escaping (Bool, Error?) -> Void) {
+    func saveWorkout(startDate: Date, endDate: Date, distance: Double, distanceUnit: HKUnit, calories: Double, minutesDuration: Double, completion: @escaping (Bool, Error?) -> Void) {
         let distanceQuantity = HKQuantity(unit: distanceUnit, doubleValue: distance)
         let caloriesQuantity = HKQuantity(unit: HKUnit.kilocalorie(), doubleValue: calories)
-        let workout = HKWorkout(activityType: .running, start: startDate, end: endDate, duration: abs(endDate.timeIntervalSince(startDate)), totalEnergyBurned: caloriesQuantity, totalDistance: distanceQuantity, metadata: nil)
+        let workout = HKWorkout(activityType: .running, start: startDate, end: endDate, duration: minutesDuration, totalEnergyBurned: caloriesQuantity, totalDistance: distanceQuantity, metadata: nil)
         healthKitStore.save(workout, withCompletion: { (success, error) -> Void in
             if error !=  nil {
                 print("Error saving workout: \(error)")
@@ -165,11 +165,15 @@ class HealthKitManager: UIView {
                 let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
                 let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
                 
+                print("MILES \(distance)")
+                print("cals \(calories)")
+                print("duration \(minutesDuration)")
+                
                 if let unwrappedEntity = entity {
                     let newWorkout = Workout(context: managedContext)
-                    newWorkout.mileage = String(describing: self.distance)
-                    newWorkout.calorie = String(describing: self.calories)
-                    newWorkout.minute = String(describing: self.duration)
+                    newWorkout.mileage = String(describing: distance)
+                    newWorkout.calorie = String(describing: calories)
+                    newWorkout.minute = String(describing: minutesDuration)
                     newWorkout.workoutDate = self.dateFormatter.string(from: Date())
                     DataModel.sharedInstance.saveContext()
                 }
@@ -178,23 +182,26 @@ class HealthKitManager: UIView {
         })
     }
     
-    func saveHealthKitData(startDate: Date, endDate: Date, distance: Double, distanceUnit: HKUnit, calories: Double) {
+    func saveHealthKitData(startDate: Date, endDate: Date, distance: Double, distanceUnit: HKUnit, calories: Double, minutesDuration: Double) {
         print("SAVE DATA")
-        saveWorkout(startDate: startDate, endDate: Date(), distance: distance, distanceUnit: HKUnit.mile(), calories: calories) { (success, error) in
+        saveWorkout(startDate: startDate, endDate: Date(), distance: distance, distanceUnit: HKUnit.mile(), calories: calories, minutesDuration: minutesDuration) { (success, error) in
             if success {
                 print("success")
                 let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
                 let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
                 
+                print("MILES \(self.distance)")
+                print("cals \(self.calories)")
+                print("duration \(minutesDuration)")
+                
                 if let unwrappedEntity = entity {
                     let newWorkout = Workout(context: managedContext)
                     newWorkout.mileage = String(describing: self.distance)
                     newWorkout.calorie = String(describing: self.calories)
-                    newWorkout.minute = String(describing: self.duration)
+                    newWorkout.minute = String(describing: minutesDuration)
                     newWorkout.workoutDate = self.dateFormatter.string(from: Date())
                     DataModel.sharedInstance.saveContext()
                 }
-                
             } else {
                 print("ERROR: \(error)")
             }

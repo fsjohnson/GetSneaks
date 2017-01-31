@@ -228,19 +228,17 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     func submitButtonSuccess() {
         let alert = UIAlertController(title: "Success", message: "You have recorded a new workout. GO YOU!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
+            self.newWorkoutData.mileageStackView.removeFromSuperview()
+            self.newWorkoutData.caloriesStackView.removeFromSuperview()
+            self.newWorkoutData.minutesStackView.removeFromSuperview()
+            self.newWorkoutData.submitButton.removeFromSuperview()
+            self.newWorkoutData.notTodayButton.removeFromSuperview()
             self.getSneaksTop.populateMilesCompleted()
             self.populateChartData()
             self.getChartData(with: self.dates, values: self.miles, legend: "Miles")
             self.barChartConfig()
             self.needNewSneaksAlert()
-            self.newWorkoutData.mileageStackView.removeFromSuperview()
-            self.newWorkoutData.caloriesStackView.removeFromSuperview()
-            self.newWorkoutData.minutesStackView.removeFromSuperview()
-            self.newWorkoutData.selectAlert = 1
-            self.newWorkoutData.submitButton.removeFromSuperview()
-            self.newWorkoutData.notTodayButton.removeFromSuperview()
             self.configNewWorkoutDataView()
-            
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -443,8 +441,13 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
                 print("cals: \(self.healthKitCalories)")
                 print("start: \(self.healthKitStartTime)")
                 print("end: \(self.healthKitEndDate)")
-                self.healthKitManager.saveHealthKitData(startDate: self.healthKitStartTime, endDate: self.healthKitEndDate, distance: self.healthKitTotalDistance, distanceUnit: HKUnit.mile(), calories: self.healthKitCalories)
-                self.submitButtonSuccess()
+                print("TOTAL TIME: \(self.healthKitMinutes)")
+                self.convertTimeToMinutes(time: self.newWorkoutData.minutesTextField.text!)
+                self.healthKitManager.saveWorkout(startDate: self.healthKitStartTime, endDate: self.healthKitEndDate, distance: self.healthKitTotalDistance, distanceUnit: HKUnit.mile(), calories: self.healthKitCalories, minutesDuration: self.healthKitMinutes, completion: { (success, error) in
+                    if success {
+                        self.submitButtonSuccess()
+                    }
+                })
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
             }))
@@ -454,20 +457,20 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
     
     func viewHealthKitData() {
         newWorkoutData.configManualInput()
+        self.newWorkoutData.selectAlert = 1
         healthKitManager.getDistance(with: { (distance, error) in
             if error == nil {
                 guard let duration = distance?.endDate.timeIntervalSince(self.healthKitStartTime) else { print("error calc duration");return }
                 guard let endDate = distance?.endDate else { return }
                 self.healthKitEndDate = endDate
                 let hours = Int(duration / 3600)
+                print("HOURS: \(hours)")
                 let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
                 let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
                 let timeString = String("\(hours):\(minutes):\(seconds)")
                 guard let unwrappedTimeLeft = timeString else { return }
                 guard let miles: Double = distance?.sumQuantity()?.doubleValue(for: HKUnit.mile()).roundTo(places: 2) else { return }
-                print("health kit miles: \(miles)")
                 self.healthKitTotalDistance = miles
-                self.healthKitMinutes = duration
                 OperationQueue.main.addOperation {
                     self.newWorkoutData.mileageTextField.text = String(describing: miles)
                     self.newWorkoutData.minutesTextField.text = String(describing: unwrappedTimeLeft)
@@ -483,6 +486,15 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
                 self.newWorkoutData.caloriesTextField.text = String(describing: cals.roundTo(places: 2))
             }
         }
+    }
+    
+    func convertTimeToMinutes(time: String) {
+        let timeArray = time.components(separatedBy: ":")
+        guard let hour = Int(timeArray[0]) else { print("error retrieving hour"); return }
+        guard let minute = Int(timeArray[1]) else { print("error retrieving mins"); return }
+        let totalTimeInMins = (hour * 60) + minute
+        self.healthKitMinutes = Double(totalTimeInMins)
+        print("TOTAL TIME: \(self.healthKitMinutes)")
     }
     
     // Navigation
