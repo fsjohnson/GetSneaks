@@ -146,7 +146,7 @@ class NewWorkoutData: UIView {
         mileageTextField.layer.borderWidth = 1.0
         mileageTextField.layer.borderColor = UIColor.white.cgColor
         mileageTextField.layer.cornerRadius = 4.0
-        mileageTextField.keyboardType = .numberPad
+        mileageTextField.keyboardType = .numbersAndPunctuation
         
         mileageStackView.axis = UILayoutConstraintAxis.horizontal
         mileageStackView.distribution  = UIStackViewDistribution.fillProportionally
@@ -181,7 +181,7 @@ class NewWorkoutData: UIView {
         caloriesTextField.layer.borderWidth = 1.0
         caloriesTextField.layer.borderColor = UIColor.white.cgColor
         caloriesTextField.layer.cornerRadius = 4.0
-        caloriesTextField.keyboardType = .numberPad
+        caloriesTextField.keyboardType = .numbersAndPunctuation
         
         caloriesStackView.axis = UILayoutConstraintAxis.horizontal
         caloriesStackView.distribution  = UIStackViewDistribution.fillProportionally
@@ -216,7 +216,7 @@ class NewWorkoutData: UIView {
         minutesTextField.layer.borderWidth = 1.0
         minutesTextField.layer.borderColor = UIColor.white.cgColor
         minutesTextField.layer.cornerRadius = 4.0
-        minutesTextField.keyboardType = .numberPad
+        minutesTextField.keyboardType = .numbersAndPunctuation
         
         minutesStackView.axis = UILayoutConstraintAxis.horizontal
         minutesStackView.distribution  = UIStackViewDistribution.fillProportionally

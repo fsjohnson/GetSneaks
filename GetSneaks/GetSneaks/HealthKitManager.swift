@@ -190,10 +190,6 @@ class HealthKitManager: UIView {
                 let managedContext = DataModel.sharedInstance.persistentContainer.viewContext
                 let entity = NSEntityDescription.entity(forEntityName: "Workout", in: managedContext)
                 
-                print("MILES \(self.distance)")
-                print("cals \(self.calories)")
-                print("duration \(minutesDuration)")
-                
                 if let unwrappedEntity = entity {
                     let newWorkout = Workout(context: managedContext)
                     newWorkout.mileage = String(describing: self.distance)

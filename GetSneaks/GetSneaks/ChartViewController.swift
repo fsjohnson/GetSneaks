@@ -292,6 +292,7 @@ class ChartViewController: UIViewController, GetChartData, UIScrollViewDelegate 
             let alert = UIAlertController(title: "Nice job!", message: "You have reach 400 mi in your current sneakers. Time to get some fresh sneaks!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { success in
                 self.savePreviousWorkoutAndDeleteCurrent()
+                self.getSneaksTop.populateMilesCompleted()
             }))
             self.present(alert, animated: true, completion: nil)
         }

@@ -17,17 +17,17 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Request access to location</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Request access to calendar</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Request to share healthkit</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Request access to healthkit</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Request access to calendar</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Request access to location</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
