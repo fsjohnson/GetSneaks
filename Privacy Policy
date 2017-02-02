@@ -8,6 +8,8 @@ Personal Data collected for the following purposes and using the following servi
 
 Firebase registration and authentication
 
+HealthKit
+
 Personal Data: various types of Data as specified in the privacy policy of the service
 
 Full policy
@@ -42,7 +44,7 @@ The Data is kept for the time necessary to provide the service requested by the 
 
 The use of the collected Data
 
-The Data concerning the User is collected to allow the Owner to provide its services, as well as for the following purposes: Location-based interactions and Registration and authentication.
+The Data concerning the User is collected to allow the Owner to provide its services, as well as for the following purposes: Location-based interactions and Registration, authentication and fitness data.
 
 The Personal Data used for each purpose is outlined in the specific sections of this document.
 
@@ -50,10 +52,10 @@ Detailed information on the processing of Personal Data
 
 Personal Data is collected for the following purposes and using the following services:
 
-This Application may collect, use, and share User location Data in order to provide location-based services.
+This Application may collect, use, and share User location Data and fitness data in order to provide location-based and HealthKit services.
 Most browsers and devices provide tools to opt out from this feature by default. If explicit authorization has been provided, the User’s location data may be tracked by this Application.
 
-Personal Data collected: geographic position.
+Personal Data collected: geographic position and HealthKit.
 
 Registration and authentication
 
