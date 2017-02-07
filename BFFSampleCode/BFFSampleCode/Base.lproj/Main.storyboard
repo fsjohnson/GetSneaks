@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="K5x-r2-ARh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Previous Posts-->
+        <scene sceneID="ofA-G1-ZJM">
+            <objects>
+                <tableViewController id="Mjg-ac-7fY" customClass="FeedTableViewController" customModule="BFFSampleCode" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="SX0-LF-2pf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="booksPosted" rowHeight="150" id="aoi-k2-Ipu" customClass="FriendsBooksPostedTableViewCell" customModule="BFFSampleCode" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aoi-k2-Ipu" id="wQp-C8-3Fp">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IzH-AM-OWu" customClass="PostsView" customModule="BFFSampleCode" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="359" height="133"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="IzH-AM-OWu" firstAttribute="bottom" secondItem="wQp-C8-3Fp" secondAttribute="bottomMargin" id="0fG-B1-2Rp"/>
+                                        <constraint firstItem="IzH-AM-OWu" firstAttribute="top" secondItem="wQp-C8-3Fp" secondAttribute="topMargin" id="IPL-PJ-yr2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="IzH-AM-OWu" secondAttribute="trailing" id="iNz-sP-ebw"/>
+                                        <constraint firstItem="IzH-AM-OWu" firstAttribute="leading" secondItem="wQp-C8-3Fp" secondAttribute="leadingMargin" id="x8m-zh-OSU"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postView" destination="IzH-AM-OWu" id="LIG-db-tmy"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mjg-ac-7fY" id="bwi-Zj-Mfc"/>
+                            <outlet property="delegate" destination="Mjg-ac-7fY" id="CGH-Cf-Epa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Previous Posts" id="dQl-RV-clo"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f4o-4Y-YYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1180" y="161.46926536731635"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aXi-x1-1R9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K5x-r2-ARh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EpM-77-SyP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mjg-ac-7fY" kind="relationship" relationship="rootViewController" id="Dzh-Pm-qcg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQX-f1-zX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="240.80000000000001" y="161.46926536731635"/>
+        </scene>
+    </scenes>
+</document>
