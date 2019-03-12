@@ -1,0 +1,6 @@
+module Pods_MyVirtualVet {
+  umbrella header "Pods-MyVirtualVet-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6B79F87B737B2E4541869601 /* libPods-MyVirtualVet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20EC7A887885A60E5417C6F3 /* libPods-MyVirtualVet.a */; };
+		B5249F692236FE7600900CB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5249F682236FE7600900CB3 /* AppDelegate.swift */; };
+		B5249F6B2236FE7600900CB3 /* SignUpLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5249F6A2236FE7600900CB3 /* SignUpLoginViewController.swift */; };
+		B5249F6E2236FE7600900CB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5249F6C2236FE7600900CB3 /* Main.storyboard */; };
+		B5249F702236FE7800900CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5249F6F2236FE7800900CB3 /* Assets.xcassets */; };
+		B5249F732236FE7800900CB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5249F712236FE7800900CB3 /* LaunchScreen.storyboard */; };
+		B5249F7B2237025000900CB3 /* SignUpLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5249F7A2237025000900CB3 /* SignUpLoginViewModel.swift */; };
+		B5249F7E2237110100900CB3 /* TitleDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5249F7D2237110100900CB3 /* TitleDetailTableViewCell.swift */; };
+		B5249F812237128400900CB3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5249F802237128400900CB3 /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0E83B2F69A512873C823632C /* Pods-MyVirtualVet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyVirtualVet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyVirtualVet/Pods-MyVirtualVet.debug.xcconfig"; sourceTree = "<group>"; };
+		20EC7A887885A60E5417C6F3 /* libPods-MyVirtualVet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyVirtualVet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DE8D25781C13619711E4CFC /* Pods-MyVirtualVet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyVirtualVet.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyVirtualVet/Pods-MyVirtualVet.release.xcconfig"; sourceTree = "<group>"; };
+		B5249F652236FE7600900CB3 /* MyVirtualVet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyVirtualVet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5249F682236FE7600900CB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5249F6A2236FE7600900CB3 /* SignUpLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpLoginViewController.swift; sourceTree = "<group>"; };
+		B5249F6D2236FE7600900CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B5249F6F2236FE7800900CB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5249F722236FE7800900CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5249F742236FE7800900CB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5249F7A2237025000900CB3 /* SignUpLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpLoginViewModel.swift; sourceTree = "<group>"; };
+		B5249F7D2237110100900CB3 /* TitleDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B5249F802237128400900CB3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5249F622236FE7600900CB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B79F87B737B2E4541869601 /* libPods-MyVirtualVet.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F456598D17B3A3E5DC06027 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E83B2F69A512873C823632C /* Pods-MyVirtualVet.debug.xcconfig */,
+				2DE8D25781C13619711E4CFC /* Pods-MyVirtualVet.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AC97BC5E7909FE0C5037C83C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20EC7A887885A60E5417C6F3 /* libPods-MyVirtualVet.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B5249F5C2236FE7600900CB3 = {
+			isa = PBXGroup;
+			children = (
+				B5249F672236FE7600900CB3 /* MyVirtualVet */,
+				B5249F662236FE7600900CB3 /* Products */,
+				2F456598D17B3A3E5DC06027 /* Pods */,
+				AC97BC5E7909FE0C5037C83C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B5249F662236FE7600900CB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5249F652236FE7600900CB3 /* MyVirtualVet.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5249F672236FE7600900CB3 /* MyVirtualVet */ = {
+			isa = PBXGroup;
+			children = (
+				B5249F682236FE7600900CB3 /* AppDelegate.swift */,
+				B5249F802237128400900CB3 /* Extensions.swift */,
+				B5249F7F2237115900900CB3 /* Reusable Views */,
+				B5249F7C2237025900900CB3 /* SignUp & Login */,
+				B5249F6C2236FE7600900CB3 /* Main.storyboard */,
+				B5249F6F2236FE7800900CB3 /* Assets.xcassets */,
+				B5249F712236FE7800900CB3 /* LaunchScreen.storyboard */,
+				B5249F742236FE7800900CB3 /* Info.plist */,
+			);
+			path = MyVirtualVet;
+			sourceTree = "<group>";
+		};
+		B5249F7C2237025900900CB3 /* SignUp & Login */ = {
+			isa = PBXGroup;
+			children = (
+				B5249F6A2236FE7600900CB3 /* SignUpLoginViewController.swift */,
+				B5249F7A2237025000900CB3 /* SignUpLoginViewModel.swift */,
+			);
+			path = "SignUp & Login";
+			sourceTree = "<group>";
+		};
+		B5249F7F2237115900900CB3 /* Reusable Views */ = {
+			isa = PBXGroup;
+			children = (
+				B5249F7D2237110100900CB3 /* TitleDetailTableViewCell.swift */,
+			);
+			path = "Reusable Views";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5249F642236FE7600900CB3 /* MyVirtualVet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5249F772236FE7800900CB3 /* Build configuration list for PBXNativeTarget "MyVirtualVet" */;
+			buildPhases = (
+				CA4AFF5171C34F801AA20D49 /* [CP] Check Pods Manifest.lock */,
+				B5249F612236FE7600900CB3 /* Sources */,
+				B5249F622236FE7600900CB3 /* Frameworks */,
+				B5249F632236FE7600900CB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyVirtualVet;
+			productName = MyVirtualVet;
+			productReference = B5249F652236FE7600900CB3 /* MyVirtualVet.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5249F5D2236FE7600900CB3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = FJ;
+				TargetAttributes = {
+					B5249F642236FE7600900CB3 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = B5249F602236FE7600900CB3 /* Build configuration list for PBXProject "MyVirtualVet" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5249F5C2236FE7600900CB3;
+			productRefGroup = B5249F662236FE7600900CB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5249F642236FE7600900CB3 /* MyVirtualVet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5249F632236FE7600900CB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5249F732236FE7800900CB3 /* LaunchScreen.storyboard in Resources */,
+				B5249F702236FE7800900CB3 /* Assets.xcassets in Resources */,
+				B5249F6E2236FE7600900CB3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CA4AFF5171C34F801AA20D49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyVirtualVet-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5249F612236FE7600900CB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5249F812237128400900CB3 /* Extensions.swift in Sources */,
+				B5249F6B2236FE7600900CB3 /* SignUpLoginViewController.swift in Sources */,
+				B5249F7B2237025000900CB3 /* SignUpLoginViewModel.swift in Sources */,
+				B5249F7E2237110100900CB3 /* TitleDetailTableViewCell.swift in Sources */,
+				B5249F692236FE7600900CB3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B5249F6C2236FE7600900CB3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5249F6D2236FE7600900CB3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B5249F712236FE7800900CB3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B5249F722236FE7800900CB3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B5249F752236FE7800900CB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B5249F762236FE7800900CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5249F782236FE7800900CB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E83B2F69A512873C823632C /* Pods-MyVirtualVet.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2UY7XP5ASH;
+				INFOPLIST_FILE = MyVirtualVet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.MyVirtualVet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B5249F792236FE7800900CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DE8D25781C13619711E4CFC /* Pods-MyVirtualVet.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2UY7XP5ASH;
+				INFOPLIST_FILE = MyVirtualVet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.MyVirtualVet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5249F602236FE7600900CB3 /* Build configuration list for PBXProject "MyVirtualVet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5249F752236FE7800900CB3 /* Debug */,
+				B5249F762236FE7800900CB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5249F772236FE7800900CB3 /* Build configuration list for PBXNativeTarget "MyVirtualVet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5249F782236FE7800900CB3 /* Debug */,
+				B5249F792236FE7800900CB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5249F5D2236FE7600900CB3 /* Project object */;
+}

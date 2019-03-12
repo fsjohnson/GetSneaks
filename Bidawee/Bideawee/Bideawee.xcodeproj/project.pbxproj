@@ -1,0 +1,372 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B53DAF121F6F4EE000F7D385 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B53DAF111F6F4EE000F7D385 /* Launch Screen.storyboard */; };
+		B53DAF141F70A10900F7D385 /* NavigationController+StatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DAF131F70A10900F7D385 /* NavigationController+StatusBar.swift */; };
+		B53DAF161F749E3A00F7D385 /* AnimalDetailsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DAF151F749E3A00F7D385 /* AnimalDetailsCollectionViewController.swift */; };
+		B53DAF181F75E63200F7D385 /* AnimalDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DAF171F75E63200F7D385 /* AnimalDetailCollectionViewCell.swift */; };
+		B5839CFC1F77F302006A34E7 /* DetailTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5839CFB1F77F302006A34E7 /* DetailTopView.swift */; };
+		B5939B551F6E2B8700BB8A08 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5939B541F6E2B8700BB8A08 /* ResultsTableViewController.swift */; };
+		B5939B571F6E2CE700BB8A08 /* AnimalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5939B561F6E2CE600BB8A08 /* AnimalModel.swift */; };
+		B5939B591F6E2DC300BB8A08 /* AnimalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5939B581F6E2DC300BB8A08 /* AnimalTableViewCell.swift */; };
+		B5EA05461F781B210020A393 /* SearchSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EA05451F781B210020A393 /* SearchSubView.swift */; };
+		B5EB59511F6EF6CD006BFED4 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB59501F6EF6CD006BFED4 /* CustomFont.swift */; };
+		B5EB59531F6EF6FA006BFED4 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB59521F6EF6FA006BFED4 /* CustomColor.swift */; };
+		B5F4F7AD1F645303005F5F9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4F7AC1F645303005F5F9F /* AppDelegate.swift */; };
+		B5F4F7AF1F645303005F5F9F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4F7AE1F645303005F5F9F /* SearchViewController.swift */; };
+		B5F4F7B41F645303005F5F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F4F7B31F645303005F5F9F /* Assets.xcassets */; };
+		B5F4F7BF1F65A6AE005F5F9F /* MyPickerCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4F7BE1F65A6AE005F5F9F /* MyPickerCustomView.swift */; };
+		B5F4F7C11F65C72F005F5F9F /* UITextField+PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F4F7C01F65C72F005F5F9F /* UITextField+PickerView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B53DAF111F6F4EE000F7D385 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		B53DAF131F70A10900F7D385 /* NavigationController+StatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+StatusBar.swift"; sourceTree = "<group>"; };
+		B53DAF151F749E3A00F7D385 /* AnimalDetailsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailsCollectionViewController.swift; sourceTree = "<group>"; };
+		B53DAF171F75E63200F7D385 /* AnimalDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		B5839CFB1F77F302006A34E7 /* DetailTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTopView.swift; sourceTree = "<group>"; };
+		B5939B541F6E2B8700BB8A08 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		B5939B561F6E2CE600BB8A08 /* AnimalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalModel.swift; sourceTree = "<group>"; };
+		B5939B581F6E2DC300BB8A08 /* AnimalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalTableViewCell.swift; sourceTree = "<group>"; };
+		B5EA05451F781B210020A393 /* SearchSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubView.swift; sourceTree = "<group>"; };
+		B5EB59501F6EF6CD006BFED4 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		B5EB59521F6EF6FA006BFED4 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
+		B5F4F7A91F645303005F5F9F /* Bideawee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bideawee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F4F7AC1F645303005F5F9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B5F4F7AE1F645303005F5F9F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		B5F4F7B31F645303005F5F9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5F4F7B81F645303005F5F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5F4F7BE1F65A6AE005F5F9F /* MyPickerCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPickerCustomView.swift; sourceTree = "<group>"; };
+		B5F4F7C01F65C72F005F5F9F /* UITextField+PickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+PickerView.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B5F4F7A61F645302005F5F9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B57E73C91F78368D008962CC /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				B5F4F7AE1F645303005F5F9F /* SearchViewController.swift */,
+				B5EA05451F781B210020A393 /* SearchSubView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		B57E73CA1F783699008962CC /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				B5939B541F6E2B8700BB8A08 /* ResultsTableViewController.swift */,
+				B5939B581F6E2DC300BB8A08 /* AnimalTableViewCell.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		B57E73CB1F7836B5008962CC /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				B53DAF151F749E3A00F7D385 /* AnimalDetailsCollectionViewController.swift */,
+				B53DAF171F75E63200F7D385 /* AnimalDetailCollectionViewCell.swift */,
+				B5839CFB1F77F302006A34E7 /* DetailTopView.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		B57E73CC1F7836CC008962CC /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				B5F4F7C01F65C72F005F5F9F /* UITextField+PickerView.swift */,
+				B5F4F7BE1F65A6AE005F5F9F /* MyPickerCustomView.swift */,
+				B53DAF131F70A10900F7D385 /* NavigationController+StatusBar.swift */,
+				B5EB59501F6EF6CD006BFED4 /* CustomFont.swift */,
+				B5EB59521F6EF6FA006BFED4 /* CustomColor.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		B57E73CD1F7836E5008962CC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B5939B561F6E2CE600BB8A08 /* AnimalModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B5F4F7A01F645302005F5F9F = {
+			isa = PBXGroup;
+			children = (
+				B5F4F7AB1F645303005F5F9F /* Bideawee */,
+				B5F4F7AA1F645303005F5F9F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B5F4F7AA1F645303005F5F9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B5F4F7A91F645303005F5F9F /* Bideawee.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B5F4F7AB1F645303005F5F9F /* Bideawee */ = {
+			isa = PBXGroup;
+			children = (
+				B5F4F7AC1F645303005F5F9F /* AppDelegate.swift */,
+				B53DAF111F6F4EE000F7D385 /* Launch Screen.storyboard */,
+				B57E73C91F78368D008962CC /* Search */,
+				B57E73CA1F783699008962CC /* Results */,
+				B57E73CB1F7836B5008962CC /* Details */,
+				B57E73CD1F7836E5008962CC /* Model */,
+				B57E73CC1F7836CC008962CC /* Custom */,
+				B5F4F7B31F645303005F5F9F /* Assets.xcassets */,
+				B5F4F7B81F645303005F5F9F /* Info.plist */,
+			);
+			path = Bideawee;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B5F4F7A81F645302005F5F9F /* Bideawee */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5F4F7BB1F645303005F5F9F /* Build configuration list for PBXNativeTarget "Bideawee" */;
+			buildPhases = (
+				B5F4F7A51F645302005F5F9F /* Sources */,
+				B5F4F7A61F645302005F5F9F /* Frameworks */,
+				B5F4F7A71F645302005F5F9F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bideawee;
+			productName = Bideawee;
+			productReference = B5F4F7A91F645303005F5F9F /* Bideawee.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B5F4F7A11F645302005F5F9F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = FJ;
+				TargetAttributes = {
+					B5F4F7A81F645302005F5F9F = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B5F4F7A41F645302005F5F9F /* Build configuration list for PBXProject "Bideawee" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B5F4F7A01F645302005F5F9F;
+			productRefGroup = B5F4F7AA1F645303005F5F9F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B5F4F7A81F645302005F5F9F /* Bideawee */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B5F4F7A71F645302005F5F9F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53DAF121F6F4EE000F7D385 /* Launch Screen.storyboard in Resources */,
+				B5F4F7B41F645303005F5F9F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B5F4F7A51F645302005F5F9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5F4F7BF1F65A6AE005F5F9F /* MyPickerCustomView.swift in Sources */,
+				B5839CFC1F77F302006A34E7 /* DetailTopView.swift in Sources */,
+				B5939B591F6E2DC300BB8A08 /* AnimalTableViewCell.swift in Sources */,
+				B5EB59531F6EF6FA006BFED4 /* CustomColor.swift in Sources */,
+				B53DAF141F70A10900F7D385 /* NavigationController+StatusBar.swift in Sources */,
+				B53DAF161F749E3A00F7D385 /* AnimalDetailsCollectionViewController.swift in Sources */,
+				B53DAF181F75E63200F7D385 /* AnimalDetailCollectionViewCell.swift in Sources */,
+				B5939B571F6E2CE700BB8A08 /* AnimalModel.swift in Sources */,
+				B5EA05461F781B210020A393 /* SearchSubView.swift in Sources */,
+				B5939B551F6E2B8700BB8A08 /* ResultsTableViewController.swift in Sources */,
+				B5F4F7AF1F645303005F5F9F /* SearchViewController.swift in Sources */,
+				B5EB59511F6EF6CD006BFED4 /* CustomFont.swift in Sources */,
+				B5F4F7C11F65C72F005F5F9F /* UITextField+PickerView.swift in Sources */,
+				B5F4F7AD1F645303005F5F9F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B5F4F7B91F645303005F5F9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B5F4F7BA1F645303005F5F9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B5F4F7BC1F645303005F5F9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Bideawee/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.Bideawee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		B5F4F7BD1F645303005F5F9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Bideawee/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.FJ.Bideawee;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B5F4F7A41F645302005F5F9F /* Build configuration list for PBXProject "Bideawee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5F4F7B91F645303005F5F9F /* Debug */,
+				B5F4F7BA1F645303005F5F9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5F4F7BB1F645303005F5F9F /* Build configuration list for PBXNativeTarget "Bideawee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5F4F7BC1F645303005F5F9F /* Debug */,
+				B5F4F7BD1F645303005F5F9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B5F4F7A11F645302005F5F9F /* Project object */;
+}
